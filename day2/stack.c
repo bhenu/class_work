@@ -49,7 +49,7 @@ void pop(void)
         printf("Stack is empty\n");
     else
     {
-        printf("%d removed from position %d of the Stack.\n", Stack[pos], pos);
+        printf("%d poped from position %d of the Stack.\n", Stack[pos], pos);
         pos--;
     }
 }
