@@ -12,16 +12,16 @@ int main(int argc, char * argv[])
     char * exp;
     int j = 0;          /* index of expression */
 
-    if(argc < 1)
+    if(argc < 2)
     {
         printf("Usage: calc POSTFIX_EXPRESSION\n");
         return 0;
     }
     exp = argv[1];
     while( exp[j] != '\0')
-    {
-        printf("%s || %d\n", op, getop(op, &j, argv[1]));
-        /*if(getop(op, &j, argv[1]) == '\0')
+    {   /*
+        printf("%s || %d\n", op, getop(op, &j, argv[1]));*/
+        if(getop(op, &j, argv[1]) == '\0')
             push(atof(op));
         else
         {
@@ -47,7 +47,7 @@ int main(int argc, char * argv[])
                             printf("error: unknown command %s\n", op);
                             break;
                 }
-            }*/
+            }
         }
 
         printf("result: %f\n", pop());

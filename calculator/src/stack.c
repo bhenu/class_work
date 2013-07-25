@@ -11,7 +11,6 @@ void push(double value) //value to push into the Stack
     else
     {
         Stack[(++pos)] = value;
-        printf("pushed!\n");
     }
 }
 

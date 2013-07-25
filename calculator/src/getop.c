@@ -5,27 +5,28 @@
 int getop(char s[], int *j, char * exp);
 
 /*test*/
-int main(void)
+/*int main(void)
 {
-    char exp[] = "1 2 + 56 - 98 54 *";
+    char exp[] = " + 12.24  3";
     char op[20];
     int j = 0;
     while(exp[j] != '\0')
     {
         getop(op, &j, exp);
-        printf("%s", op);
+        printf("operator %s\n", op);
     }
     return 0;
 }
+*/
+
 int getop(char s[], int *j, char * exp) /* output, index of current
                                        character in exp[], expression */
 {
     int i, c;
 
-    while((s[0] = c = exp[(*j)]) == ' ' || c == '\t')
+    while((s[0] = c = exp[(*j)++]) == ' ' || c == '\t')
     {
-        printf("%c", exp[(*j)]);
-        (*j)++;
+        printf("space\n");
     }
     s[1] = '\0';
     if (!isdigit(c) && c != '.')
