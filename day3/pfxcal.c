@@ -10,13 +10,13 @@
 /* variables for stack ADT */
 static double Stack[SIZE];
 static int pos = -1;
-void display(void);
 
 /* function prototypes for stack
  * both return 1 on success and
  * 0 on failure */
 int push(double);
 int pop(double *);
+void display(void);
 
 /* get operator function prototype */
 int getop(char [], char []);
@@ -76,7 +76,11 @@ int main(int argc, char *argv[])
             type = getop(postfix, op);
         }
 
-        display();
+        /*  print the result */
+        if (pos > 0)
+            printf("something went wrong. check if the input is correct.\n");
+        else
+            printf("result: %.2f\n", Stack[pos]);
 
     }
 
