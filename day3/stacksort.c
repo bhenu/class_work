@@ -48,7 +48,6 @@ int main(int argc, char *argv[])
     /* sorting algorithm */
     while (stack1.pos > -1)
     {
-        puts("loop1\n");
         pop(&poped, &stack1);
         push(poped, &stack3);
     }
@@ -57,7 +56,6 @@ int main(int argc, char *argv[])
         tmp = stack3.pos;
         while ( stack1.stack[stack1.pos] < stack2.stack[stack2.pos] && stack1.pos > -1)
         {
-            puts("loop2\n");
             pop(&poped, &stack1);
             push(poped, &stack3);
         }
@@ -65,7 +63,6 @@ int main(int argc, char *argv[])
         push(poped, &stack1);
         while (stack3.pos > tmp)
         {
-            puts("loop3\n");
             pop(&poped, &stack3);
             push(poped, &stack1);
         }
@@ -76,7 +73,6 @@ int main(int argc, char *argv[])
         tmp = stack2.pos;
         while ( stack1.stack[stack1.pos] < stack3.stack[stack3.pos] && stack1.pos > -1)
         {
-            puts("loop4\n");
             pop(&poped, &stack1);
             push(poped, &stack2);
         }
@@ -84,7 +80,6 @@ int main(int argc, char *argv[])
         push(poped, &stack1);
         while (stack2.pos > tmp)
         {
-            puts("loop5\n");
             pop(&poped, &stack2);
             push(poped, &stack1);
         }

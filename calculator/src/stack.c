@@ -1,8 +1,11 @@
 #include<stdio.h>
 #define SIZE 20
 
-static double Stack[SIZE];    //global variable to hold the Stack
-static int pos=-1;         //position of the topmost element
+static struct STACK
+{
+    int stack[SIZE];
+    int pos;
+};        //position of the topmost element
 
 void push(double value) //value to push into the Stack
 {
