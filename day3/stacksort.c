@@ -37,13 +37,10 @@ int main(int argc, char *argv[])
     /* take input into stack */
     printf("Stack 1: \n");
     fill_stack(&stack1);
-    display(stack1);
     printf("Stack 2: \n");
     fill_stack(&stack2);
-    display(stack2);
     printf("Stack 3: \n");
     fill_stack(&stack3);
-    display(stack3);
 
     /* sorting algorithm */
     while (stack1.pos > -1)
@@ -126,7 +123,6 @@ int pop(int *poped, struct STACK *mystack)
 void display(struct STACK mystack)
 {
     int i = 0;
-    printf("stack: ");
     while (i <= mystack.pos)
         printf("%d ", mystack.stack[i++]);
     printf("\n");

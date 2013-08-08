@@ -49,7 +49,7 @@ void push(int type, int value) //value to push into the Stack
         else
         {
             Stack[--pos2] = value;
-            printf("pushed to stack 2");
+            printf("pushed to stack 2\n");
         }
     }
     else
