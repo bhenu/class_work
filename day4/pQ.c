@@ -95,19 +95,27 @@ int insert(int value, int priority, struct Pqueue *Q)
 /* definition of delete */
 int delete(int *deleted, struct Pqueue *Q)
 {
-    int i, current;
-    for ( i = 0, current = 0; i <= Q->rear_pos; i++)
-        current = (Q->e[i].priority) > (Q->e[current].priority) ? i : current;
+	if ( Q->rear_pos < 0 )
+	{
+		return 0;
+	}
+	else
+	{
+		int i, current;
+		for ( i = 0, current = 0; i <= Q->rear_pos; i++)
+			current = (Q->e[i].priority) > (Q->e[current].priority) ? i : current;
 
-    *deleted = (Q->e[current].value);
+		*deleted = (Q->e[current].value);
 
-    while ( current < Q->rear_pos)
-    {
-        Q->e[current] = Q->e[current+1];
-        current++;
-    }
+		while ( current < Q->rear_pos)
+		{
+			Q->e[current] = Q->e[current+1];
+			current++;
+		}
 
-    Q->rear_pos--;
+		Q->rear_pos--;
+	}
+	
     return 1;
 }
 
