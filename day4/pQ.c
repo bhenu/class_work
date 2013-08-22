@@ -47,8 +47,10 @@ int main(void)
                         insert(value, priority, &Q1);
                         break;
                 case 2:
-                        delete(&deleted, &Q1);
-                        printf("deleted from queue: %d\n", deleted);
+                        if(delete(&deleted, &Q1))
+                        {
+							printf("deleted from queue: %d\n", deleted);
+						}
                         break;
                 case 3: display(Q1);
                         break;
@@ -97,6 +99,7 @@ int delete(int *deleted, struct Pqueue *Q)
 {
 	if ( Q->rear_pos < 0 )
 	{
+		printf("Queue is empty.\n");
 		return 0;
 	}
 	else
