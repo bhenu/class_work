@@ -62,8 +62,7 @@ int Qsort(struct queue * Q1, struct queue * Q2)
     }
     
     while ( Q1->count > 0)
-    {
-		
+    {		
         /* find index of smallest element */
         
         for (i = Q1->front_pos, j = Q1->count, smallest = 0; j > 0; j--, i = (i+1)%QSIZE)
@@ -71,7 +70,6 @@ int Qsort(struct queue * Q1, struct queue * Q2)
             smallest = Q1->elements[smallest] < (Q1->elements[i]) ? smallest : i;
         }
         
-
         /* delete elements till the ith element */
         while ( Q1->front_pos != smallest )
         {
@@ -130,7 +128,7 @@ void display(struct queue Q)
         Q.front_pos = (Q.front_pos + 1)%QSIZE;
         Q.count--;
     }
-    printf("TAIL\n");
+    printf("[TAIL]\n");
 }
 
 /* definition of getop function */
