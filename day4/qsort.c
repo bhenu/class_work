@@ -60,23 +60,27 @@ int Qsort(struct queue * Q1, struct queue * Q2)
     {
         insert(deleted, Q1);
     }
+    
     while ( Q1->count > 0)
     {
+		
         /* find index of smallest element */
-        for (i = Q1->front_pos, j = Q1->count; j > 0; j--, i = (i+1)%QSIZE)
+        
+        for (i = Q1->front_pos, j = Q1->count, smallest = 0; j > 0; j--, i = (i+1)%QSIZE)
         {
-            smallest = smallest > (Q1->elements[i]) ? smallest : i;
+            smallest = Q1->elements[smallest] < (Q1->elements[i]) ? smallest : i;
         }
+        
 
         /* delete elements till the ith element */
-        while ( Q1->front_pos != i )
+        while ( Q1->front_pos != smallest )
         {
             delete(&deleted, Q1);
             insert(deleted, Q1);
         }
 
         /* insert smallest element in to the other queue */
-        if (Q1->front_pos == i)
+        if (Q1->front_pos == smallest)
         {
             delete(&deleted, Q1);
             insert(deleted, Q2);
@@ -106,7 +110,6 @@ int delete(int *deleted, struct queue * Q)
 {
     if ( Q->count <= 0)
     {
-        printf("error: queue is empty\n");
         return 0;
     }
     else
