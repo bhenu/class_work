@@ -32,6 +32,89 @@ int insert(struct lnk_lst * LL, int value) {
     }
 }
 
+int insert_after(struct lnk_lst * LL, int value, int position) {
+    if (LL->count >= SIZE ) {
+        printf("error: List too long\n");
+        return -1;
+    }
+    else if (position > LL->count || position < 1) {
+        printf("error: bad position\n");
+        return -1;
+    }
+    else {
+        struct node * new_node;
+        new_node = malloc (sizeof(struct node));  /* create new node */
+        new_node->data = value;                   /* insert the value */
+
+        /* declare the temporary variables */
+        struct node * next_node;
+        struct node *  current_node;
+        struct node *  prev_node;
+
+        /* go to the position */
+        current_node = LL->head;
+        int i = position;
+        while ( i > 1 ) {
+            current_node = current_node->next;
+            i--;
+        }
+
+        prev_node = current_node;
+        next_node = prev_node->next;
+
+        /* assign the pointers */
+        prev_node->next = new_node;
+        new_node->prev = prev_node;
+        new_node->next = next_node;
+        next_node->prev = new_node;
+        LL->count++;
+        return (position +1);
+    }
+}
+
+int insert_before(struct lnk_lst * LL, int value, int position) {
+    if (LL->count >= SIZE ) {
+        printf("error: List too long\n");
+        return -1;
+    }
+    else if (position > LL->count || position < 1) {
+        printf("error: bad position\n");
+        return -1;
+    }
+    else {
+        struct node * new_node;
+        new_node = malloc (sizeof(struct node));  /* create new node */
+        new_node->data = value;                   /* insert the value */
+
+        /* declare the temporary variables */
+        struct node * next_node;
+        struct node *  current_node;
+        struct node *  prev_node;
+
+        /* go to the position */
+        current_node = LL->head;
+        int i = position;
+        while ( i > 1 ) {
+            current_node = current_node->next;
+            i--;
+        }
+
+        next_node = current_node;
+        prev_node = next_node->prev;
+
+        /* assign the pointers */
+        prev_node->next = new_node;
+        new_node->prev = prev_node;
+        new_node->next = next_node;
+        next_node->prev = new_node;
+        if (position == 1) {
+            LL->head = new_node;
+        }
+        LL->count++;
+        return (position);
+    }
+}
+
 int delete(struct lnk_lst * LL, int * deleted, int position)
 {
     if (LL->count < 1) {
@@ -112,4 +195,11 @@ void sdelete(struct lnk_lst * LL, int value) {
             count++;
         }
     }
+}
+
+struct lnk_lst init_lnk_lst(void) {
+    struct lnk_lst struct_to_return;
+    struct_to_return.count = 0;
+    struct_to_return.head = NULL;
+    return struct_to_return;
 }
