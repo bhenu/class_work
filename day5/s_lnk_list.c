@@ -47,7 +47,6 @@ int sorted_insert(struct lnk_lst * LL, int value) {
         new_node->data = value;                 /* insert the value */
         LL->head = new_node->next = new_node; /* point next previous to itself and assign that to the head pointer */
         (LL->count)++; /* increment the counter */
-        puts("l1\n");
         return LL->count;
     }
     else {
@@ -62,20 +61,22 @@ int sorted_insert(struct lnk_lst * LL, int value) {
 
         /* find the first element larger than given element */
         struct node * current = LL->head;
-        int position = 0;
+        int position = 1;
         do {
-            puts("l2\n");
             if ( current->data == value) {
+                printf("data: %d, value: %d\n", current->data, value);
                 return -1;
             }
-            else if ( current->data > value) {
+            else if ( current->data < value) {
+                printf("data: %d, value: %d #break\n ", current->data, value);
                 break;
             }
             else {
                 current = current->next;
                 position++;
+                printf("data: %d, value: %d #continue\n", current->data, value);
+                printf("position: %d\n", position);
             }
-            puts("l2:2\n");
         }while ( current != LL->head);
 
 
@@ -87,10 +88,9 @@ int sorted_insert(struct lnk_lst * LL, int value) {
         /* get current node */
         struct node * current_node = LL->head;
 
-        while (position > 1) {
+        while (position > 0) {
             current_node = current_node->next;
             position--;
-             puts("l3\n");
         }
 
         /* declare temporary variables */

@@ -8,8 +8,8 @@
 
 static struct STACK
 {
-    int stack[SIZE];
-    int pos;
+    int stack[SIZE]; // array containing the queue/stack elements
+    int pos; // top pointer
 };
 
 
@@ -31,39 +31,39 @@ int getop(char [], int *, char []);
 
 int main(void)
 {
-	struct STACK stack_1, stack_2;
-	/* initialize stack */
-	stack_1.pos = stack_2.pos = -1;
-	int value, poped; 				/* variabel to store value to be
-									pushed and value that is poped*/
-									
-	int n = 25;						/* variable to store user input */
-	
-	while(n != 0)
+    struct STACK stack_1, stack_2;
+    /* initialize stack */
+    stack_1.pos = stack_2.pos = -1;
+    int value, poped;               /* variabel to store value to be
+                                    pushed and value that is poped*/
+
+    int n = 25;                     /* variable to store user input */
+
+    while(n != 0)
     {
         printf("## 1: push to stack\n## 2: pop to stack\n## 3: display the stack\n## 4: insert into stack as queue\n## 5: delete from stack as queue\n## 0: quit\n");
         scanf("%d", &n);
         switch(n)
         {
-            case 1:	printf("Enter an integer to push\n");
+            case 1: printf("Enter an integer to push\n");
                     scanf("%d", &value);
                     push(value, &stack_1);
                     break;
             case 2: pop(&poped, &stack_1);
-					printf("%d poped\n", poped);
+                    printf("%d poped\n", poped);
                     break;
             case 3: printf("Stack:");
-					display(stack_1);
+                    display(stack_1);
                     break;
             case 4: printf("Enter integer to insert\n");
                     scanf("%d", &value);
                     push(value, &stack_1);
                     break;
-            case 5:	delete(&poped, &stack_1);
-					printf("%d deleted\n", poped);
-					break;
-			default: printf("error: wrong input\n");
-					break;
+            case 5: delete(&poped, &stack_1);
+                    printf("%d deleted\n", poped);
+                    break;
+            default: printf("error: wrong input\n");
+                    break;
         }
     }
     return 0;
@@ -164,23 +164,23 @@ int fill_stack(struct STACK *mystack)
 /* function to delete from stack as queue */
 int delete(int * deleted, struct STACK * given_stack)
 {
-	int poped; 
-	struct STACK stack_2;
-	stack_2.pos = -1;
-	
-	while(given_stack->pos > 0)
-	{
-		pop(&poped, given_stack);
-		push(poped, &stack_2);
-	}
-	
-	pop(&poped, given_stack);
-	*deleted = poped;
-	
-	while(pop(&poped, &stack_2))
-	{
-		push(poped, given_stack);
-	}
-	
-	return 1;
-} 
+    int poped;
+    struct STACK stack_2;
+    stack_2.pos = -1;
+
+    while(given_stack->pos > 0)
+    {
+        pop(&poped, given_stack);
+        push(poped, &stack_2);
+    }
+
+    pop(&poped, given_stack);
+    *deleted = poped;
+
+    while(pop(&poped, &stack_2))
+    {
+        push(poped, given_stack);
+    }
+
+    return 1;
+}

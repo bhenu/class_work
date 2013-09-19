@@ -1,45 +1,29 @@
-#include<stdio.h>
-#include<ctype.h>
-#include "calc.h"
-
-int getop(char s[], int *j, char * exp);
-
-/*test*/
-/*int main(void)
+/* definition of getop function */
+int getop(char string[], int *idx, char op[])
 {
-    char exp[] = " + 12.24  3";
-    char op[20];
-    int j = 0;
-    while(exp[j] != '\0')
-    {
-        getop(op, &j, exp);
-        printf("operator %s\n", op);
-    }
-    return 0;
-}
-*/
+    char c;     /* temp variable to store current char */
+    int i;
 
-int getop(char s[], int *j, char * exp) /* output, index of current
-                                       character in exp[], expression */
-{
-    int i, c;
+    while ((op[0] = c = string[(*idx)++]) == ' ' || c == '\t')
+    /* loop through spaces */
+        ;
+    op[1] = '\0';
 
-    while((s[0] = c = exp[(*j)++]) == ' ' || c == '\t')
-    {
-        printf("space\n");
-    }
-    s[1] = '\0';
-    if (!isdigit(c) && c != '.')
-        return c;       /*not a number*/
+    if (!isdigit(c) && c != '.') /* not a number or decimal point */
+        return 0;
+
     i = 0;
-    if(isdigit(c))      /*collect integer part*/
-        while(isdigit(s[++i] = c = exp[(*j)++]))
+    if (isdigit(c))
+        while (isdigit(op[++i] = c = string[(*idx)++]))
             ;
-    if (c == '.')       /*collect fraction part*/
-        while (isdigit(s[++i] = c = exp[(*j)++]))
+    if (c == '.')
+        while (isdigit(op[++i] = c = string[(*idx)++]))
             ;
-    s[i] = '\0';
-    if (c != '\0')
-        (*j)--;
-    return '\0';
+    op[i] = '\0';
+
+    if(c != '\0')
+        (*idx)--;
+
+    return 1;
 }
+
