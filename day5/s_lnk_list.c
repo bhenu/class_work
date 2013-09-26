@@ -49,6 +49,25 @@ int sorted_insert(struct lnk_lst * LL, int value) {
         (LL->count)++; /* increment the counter */
         return LL->count;
     }
+    else if (LL->head->data > value) { /* the first element is greater than the given element */
+		struct node * new_node;
+        new_node = malloc(sizeof(struct node)); /* create new node */
+        new_node->data = value;                 /* insert the value */
+        
+        /* get last node */
+        struct node * current = LL->head;
+        while ( current->next != LL->head) {
+            current = current->next;
+            printf("in the loop!");
+        }
+        
+        /* address assignment */
+        current->next = new_node;
+        new_node->next = LL->head;
+        LL->head = new_node;
+        (LL->count)++; /* increment the counter */
+        return 1;
+	}
     else {
 
         /* Assuming the list is in ascending order
@@ -63,19 +82,19 @@ int sorted_insert(struct lnk_lst * LL, int value) {
         struct node * current = LL->head;
         int position = 1;
         do {
+			printf("position: %d, data: %d, value: %d\n", position,  current->data, value);
             if ( current->data == value) {
-                printf("data: %d, value: %d\n", current->data, value);
+                printf("#return\n");
                 return -1;
             }
-            else if ( current->data < value) {
-                printf("data: %d, value: %d #break\n ", current->data, value);
+            else if ( current->data > value) {
+                printf("#break\n ");
                 break;
             }
             else {
                 current = current->next;
                 position++;
-                printf("data: %d, value: %d #continue\n", current->data, value);
-                printf("position: %d\n", position);
+                printf("#continue\n");
             }
         }while ( current != LL->head);
 
@@ -86,16 +105,17 @@ int sorted_insert(struct lnk_lst * LL, int value) {
         new_node->data = value;                   /* insert the value */
 
         /* get current node */
-        struct node * current_node = LL->head;
+        current = LL->head;
 
-        while (position > 0) {
-            current_node = current_node->next;
+        while (position > 2) {
+            current = current->next;            
+			printf("#loop: position: %d, value: %d, data: %d\n", position, value, current->data);
             position--;
         }
 
         /* declare temporary variables */
-        struct node * prev_node = current_node;
-        struct node * next_node = current_node->next;
+        struct node * prev_node = current;
+        struct node * next_node = current->next;
 
         /* assign the pointers */
         prev_node->next = new_node;

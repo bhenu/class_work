@@ -17,7 +17,9 @@ int main(void) {
                     scanf("%d", &value);
                     printf("inserted at position: %d\n" ,insert(&lnk_lst1, value));
                     break;
-            case 2: delete(&lnk_lst1, &deleted, lnk_lst1.count);
+            case 2: printf("enter position to delete\n");
+					scanf("%d", &position);
+					delete(&lnk_lst1, &deleted, position);
                     printf("deleted: %d\n", deleted);
                     break;
             case 3: display(lnk_lst1);
