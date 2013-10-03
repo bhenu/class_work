@@ -15,6 +15,6 @@
     /* function declarations */
     tree init_tree(void); /* initializes a binary search tree and returns it */
     int insert(tree * given_tree, int value); /* returns 1 on success */
-    int delete(node * head, int value); /* returns 1 on success */
+    int delete(tree * given_tree, int value); /* returns 1 on success */
     void display(node * head); /* displays the tree */
 #endif

@@ -3,7 +3,7 @@
 
 int main(void) {
     int n = 10;
-    int value, deleted;
+    int value;
     tree tree1 = init_tree();
 
     do {
@@ -17,7 +17,9 @@ int main(void) {
                     scanf("%d", &value);
                     insert(&tree1, value);
                     break;
-            case 2:
+            case 2:	printf("enter value to delete\n");
+                    scanf("%d", &value);
+                    delete(&tree1, value);
                     break;
             case 3: display(tree1.head);
                     break;

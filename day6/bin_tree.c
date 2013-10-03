@@ -50,7 +50,7 @@ int inst(node * root, int value) {
     return 0;
 }
 
-// wrapper function for insert
+/* wrapper function for insert */
 
 int insert(tree * given_tree, int value) {
 
@@ -74,6 +74,7 @@ int insert(tree * given_tree, int value) {
     return 0;
 }
 
+/* display the tree as a tree */
 void tree_view(node * root, int depth) {
     int i;
 
@@ -99,6 +100,80 @@ void tree_view(node * root, int depth) {
 
 }
 
+/* Wrapper for tree_view */
 void display(node * root) {
     tree_view(root, 0);
+}
+
+/* delete function */
+
+int del(node * target, node * parent) {
+	if ( target->left != NULL && target->right != NULL) {
+		node * IS = target->right;
+		
+		while ( IS->left != NULL) {
+			parent = IS;
+			IS = parent->left;
+		}
+		
+		target->data = IS->data;
+		target = IS;
+	}
+	if (target->left == NULL && target->right == NULL) {
+		if (parent->left == target)
+			parent->left = NULL;
+		else
+			parent->right = NULL;
+			
+		free(target);
+		return 1;
+	}
+	if (target->left != NULL && target->right == NULL) {
+		if ( parent->left == target)
+			parent->left = target->left;
+		else
+			parent->right = target->left;
+		
+		free(target);
+		return 1;
+	}
+	if (target->right != NULL && target->left == NULL) {
+		if ( parent->left == target)
+			parent->left = target->right;
+		else
+			parent->right = target->right;
+		
+		free(target);
+		return 1;
+	}
+	
+	return 0;
+}
+
+void search(node * root, int value) {
+	if (root->data == value) {
+		del(root, NULL);
+		return;
+	}
+	else if ( root->left != NULL && root->left->data == value) {
+		del(root->left, root);
+		return;
+	}
+	else if ( root->right != NULL && root->right->data == value) {
+		del(root->right, root);
+		return;
+	}
+	else if ( root->right != NULL && root->right->data != value) {
+		search(root->right, value);
+	}
+	else if ( root->left != NULL && root->left->data != value) {
+		search(root->left, value);
+	}
+	return;
+}
+
+/* wrapper function */
+int delete(tree * given_tree, int value) {
+	search(given_tree->head, value);
+	return 1;
 }
