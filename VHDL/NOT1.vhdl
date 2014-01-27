@@ -3,13 +3,13 @@ use ieee.std_logic_1164.all;
 
 --------------------------------------
 
-entity AND1 is
-	port (a, b: in bit; c: out bit);
-end AND1;
+entity NOT1 is
+	port (a: in bit; b: out bit);
+end NOT1;
 
 --------------------------------------
 
-architecture dataflow of AND1 is
+architecture dataflow of NOT1 is
 begin
-	c <= a and b;
+	b <= not a;
 end dataflow;
