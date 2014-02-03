@@ -1,0 +1,39 @@
+$date
+  Mon Feb  3 17:14:00 2014
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$var reg 1 ! a $end
+$var reg 1 " b $end
+$var reg 1 # c $end
+$scope module nor2_0 $end
+$var reg 1 $ a $end
+$var reg 1 % b $end
+$var reg 1 & c $end
+$upscope $end
+$enddefinitions $end
+#0
+0!
+0"
+1#
+0$
+0%
+1&
+#1000000
+1"
+0#
+1%
+0&
+#2000000
+1!
+0"
+1$
+0%
+#3000000
+1"
+1%
+#4000000
