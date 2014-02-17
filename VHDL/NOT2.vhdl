@@ -5,8 +5,7 @@ use ieee.std_logic_1164.all;
 
 entity NOT2 is
 port(	a: in std_logic;
-	b: out std_logic;
-);
+	b: out std_logic);
 end NOT2;  
 
 ---------------------------------------
