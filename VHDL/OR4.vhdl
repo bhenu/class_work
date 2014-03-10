@@ -15,6 +15,6 @@ process(a,b)
 	variable d:std_logic;	
 	begin      
 		d := a nor b;
-		c <= d nand d;
+		c <= d nor d;
 end process;
 end dataflow;

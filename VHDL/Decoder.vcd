@@ -1,0 +1,61 @@
+$date
+  Mon Feb  3 19:25:48 2014
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$var reg 1 ! a0 $end
+$var reg 1 " a1 $end
+$var reg 1 # d0 $end
+$var reg 1 $ d1 $end
+$var reg 1 % d2 $end
+$var reg 1 & d3 $end
+$scope module decoder_0 $end
+$var reg 1 ' a0 $end
+$var reg 1 ( a1 $end
+$var reg 1 ) d0 $end
+$var reg 1 * d1 $end
+$var reg 1 + d2 $end
+$var reg 1 , d3 $end
+$upscope $end
+$enddefinitions $end
+#0
+0!
+0"
+1#
+0$
+0%
+0&
+0'
+0(
+1)
+0*
+0+
+0,
+#1000000
+1!
+0#
+1$
+1'
+0)
+1*
+#2000000
+0!
+1"
+0$
+1%
+0'
+1(
+0*
+1+
+#3000000
+1!
+0%
+1&
+1'
+0+
+1,
+#4000000
