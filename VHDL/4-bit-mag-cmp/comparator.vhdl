@@ -1,5 +1,5 @@
 -- Implementation of a 1 bit magnitude comparator
--- using structural modeling
+-- using structural model
 --
 -- Author: Binayak Ghosh <ghoshbinayak@gmail.com>
 
@@ -13,7 +13,7 @@ entity ONE_BIT_COMPARATOR is
 		c, d, e: out std_logic);
 end entity ONE_BIT_COMPARATOR;
 
-architecture behavioral of ONE_BIT_COMPARATOR is
+architecture structural of ONE_BIT_COMPARATOR is
 		
 	-- declare the internal signals
 	signal 	not1_output, not2_output,
@@ -33,4 +33,4 @@ begin
 	c <= and1_output;
 	e <= and2_output;
 
-end architecture behavioral;
+end architecture structural;
