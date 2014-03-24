@@ -11,8 +11,10 @@ end entity AND_2;
 
 architecture behave of AND_2 is
 	begin
-	and_logic: process (a,b) is
+
+	and_logic: process(a,b) is
 		begin
 			c <= a and b;
 	end process and_logic;
+	
 end architecture behave;
