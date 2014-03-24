@@ -1,0 +1,47 @@
+$date
+  Tue Mar 25 01:15:37 2014
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$var reg 1 ! a0 $end
+$var reg 1 " b0 $end
+$var reg 1 # s0 $end
+$var reg 1 $ c0 $end
+$scope module halfadder $end
+$var reg 1 % a $end
+$var reg 1 & b $end
+$var reg 1 ' sum $end
+$var reg 1 ( carry $end
+$upscope $end
+$enddefinitions $end
+#0
+0!
+0"
+0#
+0$
+0%
+0&
+0'
+0(
+#1000000
+1"
+1#
+1&
+1'
+#2000000
+1!
+0"
+1%
+0&
+#3000000
+1"
+0#
+1$
+1&
+0'
+1(
+#4000000
