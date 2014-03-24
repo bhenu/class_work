@@ -1,9 +1,11 @@
+-- Implementation of a two input AND gate
+-- using behavioral model
+
 library ieee;
 use ieee.std_logic_1164.all;
 
 --------------------------------------
 
--- declaration of two input AND gate
 entity AND_2 is
 	port(a, b: in std_logic;
 			c: out std_logic);
@@ -16,5 +18,5 @@ architecture behave of AND_2 is
 		begin
 			c <= a and b;
 	end process and_logic;
-	
+
 end architecture behave;
