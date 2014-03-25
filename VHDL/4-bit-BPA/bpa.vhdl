@@ -9,7 +9,7 @@ use ieee.std_logic_1164.all;
 --------------------------------------
 
 entity BPA is
-	port(a0, a1, a2, a3, a4, b0, b1, b2, b3, c0: in std_logic;
+	port(a0, a1, a2, a3, b0, b1, b2, b3, c0: in std_logic;
 			s0, s1, s2, s3, cout: out std_logic);
 end entity BPA;
 

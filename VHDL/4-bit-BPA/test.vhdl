@@ -21,7 +21,7 @@ begin
 
 	-- use FOUR_BIT_MAGNITUDE_COMPARATOR as component.
 	bpa: entity work.BPA(structural)
-		port map (a0, a1, a2, a3, a4, b0, b1, b2, b3, c0, s0, s1, s2, s3, cout);
+		port map (a0, a1, a2, a3, b0, b1, b2, b3, c0, s0, s1, s2, s3, cout);
 
 	-- begin the testing.
 	main_part: process
