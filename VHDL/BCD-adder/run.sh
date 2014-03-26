@@ -7,4 +7,4 @@ ghdl -a bcd-adder.vhdl
 ghdl -a test.vhdl
 ghdl -e test
 ghdl -r test --vcd=op.vcd
-# gtkwave op.vcd
+gtkwave op.vcd
