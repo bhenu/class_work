@@ -11,12 +11,12 @@ end JK_FF;
 --------------------------------------
 
 architecture behave of JK_FF is
-	signal state: std_logic := '1';
+	signal state: std_logic := '0';
 begin
 
 	main_logic: process(clk) is
 	begin      
-		if rising_edge(clk) then
+		if falling_edge(clk) then
 			if j = '1' and k = '0' then
 				state <= '0';
 			elsif j='0' and k = '1' then
