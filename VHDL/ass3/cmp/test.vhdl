@@ -14,13 +14,13 @@ end entity test;
 architecture behave of test is
 
 	-- define the internal signals.
-	signal input_1, input_2, output_1, output_2, output_3: std_logic;
+	signal input_1, input_2, less_than, equal_to, greater_than: std_logic;
 
 begin
 
 	-- use AND_2 as component.
 	one_bit_comparator: entity work.ONE_BIT_COMPARATOR(behavioral)
-		port map (a=>input_1, b=> input_2, c=>output_1, d=> output_2, e=>output_3);
+		port map (a=>input_1, b=> input_2, c=>less_than, d=> equal_to, e=>greater_than);
 
 	-- begin the testing.
 	main_part: process
@@ -30,7 +30,7 @@ begin
 	              --  The inputs of the adder.
 	              input_1, input_2: std_logic;
 	              --  The expected outputs of the adder.
-	              output_1, output_2, output_3 : std_logic;
+	              less_than, equal_to, greater_than : std_logic;
 	           end record;
 
 		--  The patterns to apply.
@@ -53,13 +53,13 @@ begin
 			wait for 1 ns;
 
 			-- check the output
-			assert output_1 = patterns(i).output_1
+			assert less_than = patterns(i).less_than
 				report "wrong output on condition" severity error;
 
-			assert output_2 = patterns(i).output_2
+			assert equal_to = patterns(i).equal_to
 				report "wrong output on condition" severity error;
 
-			assert output_3 = patterns(i).output_3
+			assert greater_than = patterns(i).greater_than
 				report "wrong output on condition" severity error;
 
 		end loop; 

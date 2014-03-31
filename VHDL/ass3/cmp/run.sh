@@ -1,12 +1,10 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]
-  then
-    printf "error: no file specified.\nUsage: run.sh <file name>\n"
-else
-	ghdl -a $1
-	ghdl -a test.vhdl
-	ghdl -e test
-	ghdl -r test --vcd=op.vcd
-	gtkwave op.vcd
-fi
+ghdl -a AND_2.vhdl
+ghdl -a NOR_2.vhdl
+ghdl -a NOT_1.vhdl
+ghdl -a comparator.vhdl
+ghdl -a test.vhdl
+ghdl -e test
+ghdl -r test --vcd=op.vcd
+# gtkwave op.vcd

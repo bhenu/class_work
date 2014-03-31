@@ -1,5 +1,5 @@
 $date
-  Mon Mar 24 21:47:26 2014
+  Mon Mar 31 14:39:48 2014
 $end
 $version
   GHDL v0
@@ -9,9 +9,9 @@ $timescale
 $end
 $var reg 1 ! input_1 $end
 $var reg 1 " input_2 $end
-$var reg 1 # output_1 $end
-$var reg 1 $ output_2 $end
-$var reg 1 % output_3 $end
+$var reg 1 # less_than $end
+$var reg 1 $ equal_to $end
+$var reg 1 % greater_than $end
 $scope module one_bit_comparator $end
 $var reg 1 & a $end
 $var reg 1 ' b $end
