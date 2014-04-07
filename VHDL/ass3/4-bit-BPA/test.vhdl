@@ -14,7 +14,7 @@ end entity test;
 architecture behave of test is
 
 	-- define the internal signals.
-	signal a0, a1, a2, a3, a4, b0, b1, b2, b3, c0: std_logic; -- inputs
+	signal a0, a1, a2, a3, b0, b1, b2, b3, c0: std_logic; -- inputs
 	signal s0, s1, s2, s3, cout: std_logic; -- output signals
 
 begin
