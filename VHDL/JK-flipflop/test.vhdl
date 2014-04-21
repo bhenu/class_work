@@ -26,63 +26,46 @@ begin
 	-- begin the testing.
 	main_part: process
 
-		-- declare an array to hold the truth table
-		-- type pattern_type is record
-		-- 	--  The inputs of the JKFF.
-		-- 	j, k: std_logic;
-		-- 	--  The expected outputs of the JKFF.
-		-- 	q, qbar: std_logic;
-	 --    end record;
-
-		-- --  The patterns to apply.
-		-- type pattern_array is array (natural range <>) of pattern_type;
-		
-		-- -- specify the input signals
-	 --  	constant patterns : pattern_array :=  (	('1', '1', '1', '0'),
-	 --  											('0', '1', '0', '1'),	  											
-	 --  											('0', '0', '0', '1'),
-	 --  											('1', '0', '1', '0'),
-	 --  											('0', '0', '1', '0'),
-	 --  											('1', '1', '0', '1'));
 
 	begin
-		--give the inputs.
-
-		wait for 5 ns;
 		
-		wait for 4 ns;
+		wait for 2 ns; --give some time offset.
+
+		--give the inputs.
+		wait for 30 ns;
 		j <= '1';
-		wait for 7 ns;
+		k <= '0';
+			
+		wait for 30 ns;
+		assert q = '1'
+			report "wrong output" severity error;
+
+		k <= '0';
 		j <= '0';
 
+		wait for 30 ns;
 		assert q = '1'
 			report "wrong output" severity error;
 
-		wait for 1 ns;
 		k <= '1';
-
-		assert q = '1'
+		j <= '0';
+		wait for 30 ns;
+		assert q = '0'
 			report "wrong output" severity error;
-		
 
-		-- for i in patterns'range loop
-		-- 	--  Set the inputs.
-		-- 	j <= patterns(i).j;
-		-- 	k <= patterns(i).k;
+		k <= '0';
+		j <= '0';
 
-		-- 	--  Wait for the results.
-		-- 	wait for 7 ns;
+		wait for 30 ns;
+		assert q = '0'
+			report "wrong output" severity error;
 
-		-- 	-- check the output
-		-- 	assert q = patterns(i).q
-		-- 		report "wrong output" severity error;
+		j <= '1';
+		k <= '1';
+		wait for 50 ns;
+		assert q = '1'
+			report "wrong output" severity error;		
 
-		-- 	assert qbar = patterns(i).qbar
-		-- 		report "wrong output" severity error;
-
-		-- end loop; 
-
-		-- testing complete
 		assert false
 			report "end of test" severity note;
 

@@ -18,9 +18,9 @@ begin
 	begin      
 		if falling_edge(clk) then
 			if j = '1' and k = '0' then
-				state <= '0';
-			elsif j='0' and k = '1' then
 				state <= '1';
+			elsif j='0' and k = '1' then
+				state <= '0';
 			elsif j = '1' and k = '1' then
 				state <= not state;
 			end if ;				
