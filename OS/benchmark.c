@@ -5,33 +5,6 @@
 int isPrime(int);
 void drawGraph(void);
 int main(int argc, char const * argv[]) {
-	// int input;
-	// /* if no argument is given raise an error */
-	// if (argc == 1){
-	// 	printf("Usage: benchmark <number to be tested>\n");
-	// 	return 0;
-	// }
-
-	// /* get the input */
-	// input = atoi(argv[1]);
-
-	/* start the clock */
-
-	/* run benchmark */
-	// if (isPrime(input)) {
-	// 	gettimeofday(&end_time, NULL);
-	// 	time_lapsed = (end_time.tv_sec - start_time.tv_sec) + 
-	// 					((double)(end_time.tv_usec - start_time.tv_usec))/1000000;
-	// 	printf("Yes: the no is prime\n");
-	// 	printf("%f Seconds were taken to compute this.\n", (double)time_lapsed);
-	// }
-	// else {
-	// 	gettimeofday(&end_time, NULL);
-	// 	time_lapsed = (end_time.tv_sec - start_time.tv_sec) +
-	// 					((double)(end_time.tv_usec - start_time.tv_usec))/1000000;
-	// 	printf("No: the no is not prime\n");
-	// 	printf("%f Seconds were taken to compute this.\n", (double)time_lapsed);
-	// }
 	drawGraph();
 	return 0;
 }
@@ -59,12 +32,11 @@ void drawGraph() {
 	double time_lapsed;
 	int i;
 	FILE *f = fopen("data2.txt", "w");	
-	for(i = 90001; i < 1000001; i++){
+	for(i = 999000; i < 1000001; i++){
 		gettimeofday(&start_time, NULL);
 		if (isPrime(i)) {
 			gettimeofday(&end_time, NULL);
-			time_lapsed = (end_time.tv_sec - start_time.tv_sec) + 
-							((double)(end_time.tv_usec - start_time.tv_usec))/1000000;
+			time_lapsed = (double)(end_time.tv_usec - start_time.tv_usec);
 			fprintf(f, "%d\t", i);
 			fprintf(f, "%f\n", (double)time_lapsed);
 		}
