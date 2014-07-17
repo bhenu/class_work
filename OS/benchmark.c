@@ -31,7 +31,7 @@ void drawGraph() {
 	struct timeval start_time, end_time;	
 	double time_lapsed;
 	int i;
-	FILE *f = fopen("data2.txt", "w");	
+	FILE *f = fopen("data.txt", "w");	
 	for(i = 999000; i < 1000001; i++){
 		gettimeofday(&start_time, NULL);
 		if (isPrime(i)) {
