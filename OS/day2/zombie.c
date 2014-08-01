@@ -8,7 +8,7 @@ int main(int argc, char const *argv[])
 	n1 = fork();
 	for(i = 0; i < 11; i++) {
 		if (n1 != 0) {
-			printf("%d forked into %d\n", getpid(), n1);			
+			printf("Parent(%d): Yo Talahashi.. Here comes a zombie no. %d\n", getpid(), n1);			
 			n1 = fork();
 		}
 		else{
