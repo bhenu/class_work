@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int main(int argc, char const *argv[])
+int main()
 {
 	int i;
 	pid_t n1;
@@ -11,9 +11,7 @@ int main(int argc, char const *argv[])
 			printf("Parent(%d): Yo Talahashi.. Here comes a zombie no. %d\n", getpid(), n1);			
 			n1 = fork();
 		}
-		else{
-			break;		
-		}
+		else break;		
 	}
 
 	if(n1 != 0) {
