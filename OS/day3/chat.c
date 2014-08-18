@@ -1,77 +1,84 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <pthread.h>
-#include <sys/mman.h>
-#include <sys/stat.h>        /* For mode constants */
-#include <fcntl.h>           /* For O_* constants */
+#include <unistd.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <fcntl.h>
 
-
-void shout(char * msg);
-void listen();
-
-void * thread_start1();
-void * thread_start2();
+void * shout(int *seg_id);
+void * listen(int *seg_id);
 
 int main(int argc, char const *argv[])
 {
+	int segment_id;
+	char * shared_memory;
+	size_t size = 64;
 	pthread_t tid1, tid2;
+	
+	/* Create shared memory segment */
+	segment_id = shmget(IPC_PRIVATE, size, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR);
+	
+	/* Attach the shared memory segment */
+	shared_memory = (char *)shmat(segment_id, NULL, 0);
 
-	pthread_create(&tid1, NULL, thread_start1, NULL);
-	pthread_create(&tid2, NULL, thread_start2, NULL);
-	pthread_join(tid2, NULL);
+	/* Initiate the shared memory control character */
+	*shared_memory = 0;
+
+	/* Detach shared memory segment */
+	shmdt(shared_memory);
+
+	pthread_create(&tid2, NULL, listen, &segment_id);
+	pthread_create(&tid1, NULL, shout, &segment_id);
+
 	pthread_join(tid1, NULL);
+	pthread_join(tid2, NULL);
+
+	/* Deallocate the shared memory segment. */
+	shmctl(segment_id, IPC_RMID, NULL);
+
 	return 0;
 }
 
-void shout(char * msg) {
-	printf("%s\n", msg);
-}
-
-void listen() {
-	printf("%s\n", "listening...");
-}
-
-void * thread_start1() {
-	int f;
+void * shout(int * seg_id){
 	char * chatbox;
-	char * msg;
+	char input[100];
+	size_t size = 64;
 
-	f = shm_open("/chatbox", O_CREAT | O_RDWR, S_IWUSR);
-	ftruncate(f, 1024);
-	
-	chatbox = mmap(NULL, 1024 , PROT_WRITE , MAP_SHARED , f, 0);
-	close(f);
-	
-	while(1) {
-		msg = "message from from the dark side..\n";
-		memcpy(chatbox, msg, strlen(msg));
+	/* attach shared memory segment */
+	chatbox = (char *)shmat(*seg_id, NULL, 0);
+
+	printf("%s\n", "Shout out!");
+	while(1){
+		/* read user input */
+		scanf("%s", input);
+
+		/* exit the program on q */
+		if(strcmp(input, "q") == 0){
+			*chatbox = -1;
+			break;	
+		}
+
+		sprintf((chatbox + 1), input);
+		*chatbox = 1;
 	}
+	shmdt(chatbox);
 }
 
-void * thread_start2() {
-	int f;
-	char msg[100];
+void * listen(int * seg_id) {
+	int ctrl_char;
 	char * chatbox;
-	struct shmid_ds chatstat;
-	sleep(2);
-
-	f = shm_open("/chatbox", O_RDWR, S_IWUSR);
-	ftruncate(f, 1024);
-
-	chatbox = mmap(NULL, 1024 , PROT_WRITE , MAP_SHARED , f, 0);
-	close(f);
-
-	printf("%d\n", f);
-	// printf("%s\n", "start typing:");
-
-	while(1) {
-		// shmctl(f, IPC_STAT, &chatstat); 
-		// printf("%d\n", (int)chatstat.shm_cpid);
-		memcpy(chatbox, msg, strlen(msg));
-		printf("%s\n", msg);
-		sleep(2);
+	size_t size = 64;
+	
+	chatbox = (char *)shmat(*seg_id, NULL, 0);
+	printf("%s\n", "Listening..");
+	while(1){
+		/* read control character */
+		ctrl_char = *chatbox;
+		if(ctrl_char < 0) break;
+		if(ctrl_char > 0){
+			*chatbox = 0;
+			printf("%s\n", (chatbox + 1));
+		}
 	}
+	shmdt(chatbox);
 }

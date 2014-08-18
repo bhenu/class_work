@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-void Talahashi();
+void Tallahassee();
 int main(int argc, char const *argv[])
 {
 	int i;
@@ -10,18 +10,18 @@ int main(int argc, char const *argv[])
 	n1 = fork();
 
 	if (n1 == 0) {	
-		printf("Hey Talahashi, try this one..\n");	
+		printf("Hey Tallahassee, try this one..\n");	
 	}
 	else{
-		signal(SIGCHLD, Talahashi);		
+		signal(SIGCHLD, Tallahassee);		
 		getchar();
 	}	
 	return 0;
 }
 
-void Talahashi(){
+void Tallahassee(){
 	sleep(5);
-	printf("Talahashi: Foof.. piece of cake!\n");
+	printf("Tallahassee: Foof.. piece of cake!\n");
 	sleep(2);
 	wait();
 }
