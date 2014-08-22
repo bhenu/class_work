@@ -39,11 +39,11 @@ void * thread1(){
 void *thread2(){
 	cpu_set_t core;
 	CPU_ZERO(&core);
-	CPU_SET(0, &core);	
+	CPU_SET(1, &core);	
 	struct timeval current_time;
 	int i;
 	FILE *f2;
-	sched_setaffinity(1, sizeof(cpu_set_t), &core);
+	sched_setaffinity(0, sizeof(cpu_set_t), &core);
 	f2 = fopen("data2.dat", "w");
 	        for (i = 1; i < 100000; i++) {
 	                gettimeofday(&current_time, NULL);
