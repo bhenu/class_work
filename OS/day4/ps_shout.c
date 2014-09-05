@@ -4,7 +4,11 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <semaphore.h>
+#include <signal.h>
 #define SIZE 20
+
+int x = 0;
+void quit(void);
 
 int main(int argc, char const *argv[])
 {
@@ -13,9 +17,12 @@ int main(int argc, char const *argv[])
 	char * chatbox;
 	char * front;
 	char * count;
+	struct timeval current_time;
 	size_t size = 64;
+	sem_t *mutex;
+	sem_t *sig;
 	FILE *f1;
-	sem_t *s1;
+	FILE *f = fopen("data1.dat", "w");
 
 	/* Create shared memory segment */
 	segment_id = shmget(IPC_PRIVATE, size, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR);
@@ -26,9 +33,10 @@ int main(int argc, char const *argv[])
 
 	/* NOTE: 
 	   ---------------------------------
-	   Instead of creating a second shared memory segment,
-	   I have used the first and second element in the
-	   array as the count and front variable.
+	   Instead of creating a second shared 
+	   memory segment, I have used the first
+	   and second element in the array as
+	   the count and front variable.
 	*/
 
 	/* Initiate count variable */
@@ -48,32 +56,53 @@ int main(int argc, char const *argv[])
 	fclose(f1);
 
 	/* Creat a semaphore */
-	s1 = sem_open("/binny", O_CREAT | O_EXCL , S_IWUSR | S_IRUSR | S_IWOTH | S_IROTH, 1);
-	sem_wait(s1);
-	sem_getvalue(s1, &sval);
-	printf("%d\n", sval);
+	mutex = sem_open("/binny", O_CREAT | O_EXCL , S_IWUSR | S_IRUSR | S_IWOTH | S_IROTH, 1);
+	sig = sem_open("/sig", O_CREAT | O_EXCL , S_IWUSR | S_IRUSR | S_IWOTH | S_IROTH, 0);
+
+	/* Gracefully exit */
+	signal(SIGINT, quit);
 
 	/* ready to shout */
 	printf("%s\n", "Shout out!");
 	while(1){
-		/* read user input */
-		if(*count < SIZE && sem_wait(s1)) {
-			*(chatbox + (*front + *count)%SIZE) = getchar();
-			(*count)++;
-			sem_post(s1);
-			sem_getvalue(s1, &sval);
-			printf("%d\n", sval);
+		/* exit loop on keyboard interrupt */
+		if(x) {
+			sem_wait(mutex);
+			*count = -1;
+			sem_post(mutex);
+			break;
 		}
-		else {
-			printf("%s\n", "Waiting for listner");
-			sleep(2);
+
+		/* read user input */
+		if(*count < SIZE) {
+			*(chatbox + (*front + *count)%SIZE) = getchar();
+			sem_wait(mutex);
+
+			gettimeofday(&current_time, NULL);
+			fprintf(f, "%f\t2\n", (double)current_time.tv_usec);
+
+			(*count)++;
+			sem_post(mutex);
+			sem_post(sig);
 		}
 	}
-	sem_close(s1);
-	sem_destroy(s1);
+	fclose(f);
 
+	/* Destroy the semaphore */
+	sem_close(mutex);
+	sem_close(sig);
+	sem_unlink("/binny");
+	sem_unlink("/sig");
+
+	/* Detach the shared memory. */
 	shmdt(shared_memory);
 	/* Deallocate the shared memory segment. */
 	shmctl(segment_id, IPC_RMID, NULL);
+
+	printf("%s\n", "Bye. :)\n");
 	return 0;
+}
+
+void quit(void) {
+	x = 1;
 }
