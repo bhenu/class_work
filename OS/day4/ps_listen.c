@@ -51,7 +51,7 @@ int main(int argc, char const *argv[]){
 			putchar(*(chatbox + *front));
 
 			gettimeofday(&current_time, NULL);
-			fprintf(f, "%f\t2\n", (double)current_time.tv_usec);
+			fprintf(f, "%f\t1\n", (double)current_time.tv_usec);
 
 			*front = (*front + 1)%SIZE;
 			(*count)--;
