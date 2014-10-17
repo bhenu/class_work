@@ -5,12 +5,13 @@
 
 int main() {
 	void *handle;
-	int (*factr)(int);
-	int (*facti)(int);
+	double (*factr)(double);
+	double (*facti)(double);
 	char *error;
 	struct timeval start_time, end_time;	
 	double time_lapsedr, time_lapsedi;
-	int resultr, resulti;
+	double resultr, resulti;
+	double n = 90; // find the factorial of n
 
 	handle = dlopen("/home/student/binayak/class_work/OS/day5/libfact.so", RTLD_LAZY);
 	if (!handle) {
@@ -29,18 +30,18 @@ int main() {
 	}
 
 	gettimeofday(&start_time, NULL);
-	resultr = (*factr)(20);
+	resultr = (*factr)(n);
 	gettimeofday(&end_time, NULL);
 	time_lapsedr = (double)(end_time.tv_usec - start_time.tv_usec);
 
 
 	gettimeofday(&start_time, NULL);
-	resulti = (*facti)(20);
+	resulti = (*facti)(n);
 	gettimeofday(&end_time, NULL);
 	time_lapsedi = (double)(end_time.tv_usec - start_time.tv_usec);
 
-	printf("fact(recursive) 10 computed in %lfusec: %d\n", time_lapsedr, resultr);
-	printf("fact(iterative) 10 computed in %lfusec: %d\n", time_lapsedi, resulti);
+	printf("fact(recursive) %1.0f computed in %1.2fusec: %f\n", n, time_lapsedr, resultr);
+	printf("fact(iterative) %1.0f computed in %1.2fusec: %f\n", n, time_lapsedi, resulti);
 	dlclose(handle);
 	return 0;
 }
