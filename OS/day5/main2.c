@@ -11,7 +11,7 @@ int main() {
 	struct timeval start_time, end_time;	
 	double time_lapsedr, time_lapsedi;
 	double resultr, resulti;
-	double n = 90; // find the factorial of n
+	double n = 9000; // find the factorial of n
 
 	handle = dlopen("/home/student/binayak/class_work/OS/day5/libfact.so", RTLD_LAZY);
 	if (!handle) {
@@ -40,8 +40,8 @@ int main() {
 	gettimeofday(&end_time, NULL);
 	time_lapsedi = (double)(end_time.tv_usec - start_time.tv_usec);
 
-	printf("fact(recursive) %1.0f computed in %1.2fusec: %f\n", n, time_lapsedr, resultr);
-	printf("fact(iterative) %1.0f computed in %1.2fusec: %f\n", n, time_lapsedi, resulti);
+	printf("fact(recursive) %1.0f computed in %fusec: %f\n", n, time_lapsedr, resultr);
+	printf("fact(iterative) %1.0f computed in %fusec: %f\n", n, time_lapsedi, resulti);
 	dlclose(handle);
 	return 0;
 }
