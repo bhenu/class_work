@@ -1,12 +1,12 @@
 Assignment: Shared Library
 ==========================
 
-#Compile:
+###Compile:
 ```shell
 $ sh build.sh
 ```
 
-#Run:
+###Run:
 Run the statically linked executable
 ```shell
 $ ./staticlink
@@ -17,5 +17,5 @@ Run the dynamically linked executable (this also performs the benchmark)
 $ ./benchmark
 ```
 
-#File Descriptions:
+###File Descriptions:
 
