@@ -14,6 +14,11 @@ int main(){
 	f1 = fopen("data2.dat", "r");
 	f2 = fopen("copy_data.dat", "w");
 
+	if (f1 == NULL){
+		printf("%s\n", "error: File not found.");
+		return -1;
+	}
+	
 	// Fork the process
 	pid_t pid;
 	pid = fork();
