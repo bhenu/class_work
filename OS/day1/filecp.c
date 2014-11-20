@@ -25,12 +25,14 @@ int main(){
 		while (getline(&buf, &block, f1) != -1) {
         	fprintf(f2, "%s", buf);
     	}
+    	free(buf);
     }
 	else {
 		buf = malloc(block);
 		while (getline(&buf, &block, f1) != -1) {
 			fprintf(f2, "%s", buf);
 		}
+		free(buf);
 	}	
 
     printf("done");
