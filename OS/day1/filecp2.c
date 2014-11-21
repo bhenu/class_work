@@ -16,6 +16,12 @@ int main(){
 	f2 = fopen("copy_data_ps1.dat", "w");
 	f3 = fopen("copy_data_ps2.dat", "w");
 
+	
+	if (f1 == NULL){
+		printf("%s\n", "error: File not found.");
+		return -1;
+	}
+	
 	// Fork the process
 	pid_t pid;
 	pid = fork();
@@ -27,12 +33,15 @@ int main(){
 		while (getline(&buf, &block, f1) != -1) {
         	fprintf(f3, "%s", buf);
     	}
+    	free(buf);
+
     }
 	else {
 		buf = malloc(block);
 		while (getline(&buf, &block, f1) != -1) {
 			fprintf(f2, "%s", buf);
 		}
+    	free(buf);
 	}	
 
     printf("done");
