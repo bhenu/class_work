@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build with dynamic linking
-gcc -Wall -shared -rdynamic fact.c -o libfact.so 
+gcc -Wall -shared -rdynamic -fPIC fact.c -o libfact.so 
 gcc -Wall -g main2.c -ldl -o benchmark
 
 # Build with static linking
