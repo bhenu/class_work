@@ -18,9 +18,9 @@ int main(int argc, char const *argv[])
 		sleep(5);
 		printf("Yeah! I have a grand child.\n");
 		printf("But my child is now a zombie ;(\n");
-		sleep(10);
 		wait();
 		printf("Killed the zombie; he wasn't my son any more.\n");	
+		sleep(10);
 	}	
 	return 0;
 }
