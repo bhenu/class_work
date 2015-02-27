@@ -40,19 +40,19 @@ int main(int argc, char const *argv[]) {
   */
 
   struct sockaddr_in my_addr, client_addr;
-  in_port_t myport = 15004;
+  in_port_t myport = 15003;
   struct in_addr myip;
   inet_aton("127.0.0.1", &myip);
   my_addr.sin_family = AF_INET;
   my_addr.sin_port = myport;
   my_addr.sin_addr = myip;
 
-  in_port_t clientport = 15002;
-  struct in_addr clientip;
-  inet_aton("127.0.0.1", &clientip);
+  in_port_t server = 15001;
+  struct in_addr serverip;
+  inet_aton("127.0.0.1", &serverip);
   client_addr.sin_family = AF_INET;
-  client_addr.sin_port = clientport;
-  client_addr.sin_addr = clientip;
+  client_addr.sin_port = server;
+  client_addr.sin_addr = serverip;
 
   if(bind(mysoc, (struct sockaddr *)&my_addr, sizeof(struct sockaddr_in)) == -1){
   	handle_error("bind");
@@ -68,7 +68,6 @@ int main(int argc, char const *argv[]) {
   int n = 0, i = 0, j = 5;
   
    while(j){
-    char buf = "hello";
     send(mysoc, buf, strlen(buf), 0);
       while((n=recv(mysoc, (void *)&buf, 100, 0 )) > 0){
         while(i < n){

@@ -39,9 +39,9 @@ int main(int argc, char const *argv[]) {
   */
 
   struct sockaddr_in my_addr, client_addr;
-  in_port_t myport = 15000;
+  in_port_t myport = 15001;
   struct in_addr myip;
-  inet_aton("10.24.46.37", &myip);
+  inet_aton("127.0.0.1", &myip);
   my_addr.sin_family = AF_INET;
   my_addr.sin_port = myport;
   my_addr.sin_addr = myip;
