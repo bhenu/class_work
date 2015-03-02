@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]) {
   */
 
   struct sockaddr_in my_addr, client_addr;
-  in_port_t myport = 15003;
+  in_port_t myport = 15004;
   struct in_addr myip;
   inet_aton("127.0.0.1", &myip);
   my_addr.sin_family = AF_INET;
@@ -67,6 +67,10 @@ int main(int argc, char const *argv[]) {
   char buf[100] = "hello";
   int n = 0, i = 0, j = 5;
   
+  // Get user input
+  printf("%s\n", "Enter some message:");
+  gets(buf);
+
    while(j){
     send(mysoc, buf, strlen(buf), 0);
       while((n=recv(mysoc, (void *)&buf, 100, 0 )) > 0){
