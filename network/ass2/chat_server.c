@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]) {
 
   // Bind with address
 
-  /* Man page exerpt..
+  /* Man page excerpt..
 
     struct sockaddr_in {
       sa_family_t    sin_family; // address family: AF_INET
@@ -58,27 +58,33 @@ int main(int argc, char const *argv[]) {
   socklen_t client_addr_size;
   client_addr_size = sizeof(struct sockaddr_in);
   
+  int pid;
   while(1){
     client = accept(mysoc, (struct sockaddr *)&client_addr, &client_addr_size);
     
     if (client == -1)
       handle_error("accept");
     else
-      printf("%d\n", client);
+      printf("got new client: %d\n", client);
 
-    // Send/receive data
-    char buf[100] = "no data";
-    char response[100];
-    int n = 0, i = 0;
-    while((n=recv(client, (void *)&buf, 100, 0)) > 0){
-      while(i < n){
-        response[i] = buf[n -i - 1];
-        i++;
-      }
-      response[i] = '\0';
-      send(client, response, n+1, 0);
-      if(buf[n-1] == '\0')
-        break;
+    printf("%s\n", "sending minions to work..");
+    if((pid = fork()) == 0){
+        // Send/receive data
+        char buf[100] = "no data";
+        char response[100];
+        int n = 0, i = 0;
+        while((n=recv(client, (void *)&buf, 100, 0)) > 0){
+          while(i < n){
+            response[i] = buf[n -i - 1];
+            i++;
+          }
+          response[i] = '\0';
+          send(client, response, n+1, 0);
+          if(buf[n-1] == '\0')
+            break;
+        }
+	printf("minion: job done gru!\n");
+	return 0;
     } 
   }
   

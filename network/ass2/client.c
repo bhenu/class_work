@@ -47,12 +47,15 @@ int main(int argc, char const *argv[]) {
   my_addr.sin_port = myport;
   my_addr.sin_addr = myip;
 
-  in_port_t clientport = 15002;
+  in_port_t clientport = 15000;
   struct in_addr clientip;
   inet_aton("127.0.0.1", &clientip);
   client_addr.sin_family = AF_INET;
   client_addr.sin_port = clientport;
   client_addr.sin_addr = clientip;
+
+  // experiment
+  // printf("%u\n", htons(4));
 
   if(bind(mysoc, (struct sockaddr *)&my_addr, sizeof(struct sockaddr_in)) == -1){
   	handle_error("bind");
@@ -64,7 +67,10 @@ int main(int argc, char const *argv[]) {
   }
 
   // Send/receive data
-  char buf[100] = "hello";
+  // char buf[100] = "hello";
+  char buf[100];
+  printf("%s\n", "enter string to invert");
+  scanf("%s", buf);
   send(mysoc, buf, strlen(buf), 0);
   int n = 0, i = 0;
   while((n=recv(mysoc, (void *)&buf, 100, 0 )) > 0){
@@ -77,8 +83,8 @@ int main(int argc, char const *argv[]) {
   
 
   shutdown(mysoc, SHUT_RDWR);
-  shutdown(client, SHUT_RDWR);
-  close(client);
+//  shutdown(client, SHUT_RDWR);
+//  close(client);
   close(mysoc);
   printf("\n%s\n", "done!");
   return 0;

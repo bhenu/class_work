@@ -80,9 +80,10 @@ int main(int argc, char const *argv[]) {
     }
   
 
+//shutdown(client, SHUT_RDWR);
+//close(client);
+
   shutdown(mysoc, SHUT_RDWR);
-  shutdown(client, SHUT_RDWR);
-  close(client);
   close(mysoc);
   printf("\n%s\n", "done!");
   return 0;
