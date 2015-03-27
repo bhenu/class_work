@@ -80,24 +80,20 @@ int main(int argc, char const *argv[]) {
     printf("%s\n", "sending minions to work..");
     if((pid = fork()) == 0){
         // Send/receive data
-        char buf[100] = "no data";
+        char buf[100] = "\0";
         char response[100];
         int n = 0, i = 0;
         while((n=recv(client, (void *)&buf, 100, 0)) > 0){
-          while(i < n){
-            response[i] = buf[n -i - 1];
-            i++;
-          }
-          response[i] = '\0';
-          send(client, response, n+1, 0);
+          printf("%s\n", buf);
+          send(client, buf, n+1, 0);
           if(buf[n-1] == '\0')
             break;
         }
-	printf("minion: job done gru!\n");
-	return 0;
+    	printf("minion: job done gru!\n");
+    	return 0;
     }
     else {
-	signal(SIGCHLD, jobDone);
+	   signal(SIGCHLD, jobDone);
     } 
   }
   

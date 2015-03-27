@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/ip.h>
+#include <sys/time.h>
 
 #define LISTEN_BACKLOG 49
 #define handle_error(msg)                                                      \
@@ -13,10 +14,19 @@
   } while (0)
 
 
+long timevaldiff(struct timeval *starttime, struct timeval *finishtime)
+{
+  long msec;
+  msec=(finishtime->tv_sec-starttime->tv_sec)*1000000;
+  msec+=(finishtime->tv_usec-starttime->tv_usec);
+  return msec;
+}
+
 int main(int argc, char const *argv[]) {
   // Create the socket
   int mysoc = socket(AF_INET, SOCK_STREAM, 0);
   int client;
+  struct timeval current_time, recv_time;
 
   if (mysoc == -1) {
     handle_error("socket create");
@@ -72,8 +82,10 @@ int main(int argc, char const *argv[]) {
   printf("%s\n", "enter string to invert");
   gets(buf);
   send(mysoc, buf, strlen(buf), 0);
+  gettimeofday(&current_time, NULL);
   int n = 0, i = 0;
   while((n=recv(mysoc, (void *)&buf, 100, 0 )) > 0){
+  gettimeofday(&recv_time, NULL);
     while(i < n){
       putchar(buf[i++]);
     }
@@ -81,6 +93,7 @@ int main(int argc, char const *argv[]) {
       break;
   }
  
+  printf("%ld\n", timevaldiff(&current_time, &recv_time));
 
   shutdown(mysoc, SHUT_RDWR);
 //  shutdown(client, SHUT_RDWR);
