@@ -1,0 +1,30 @@
+You have been added as a member of this wiki. You can decline the invitation or dismiss this notice.
+0 ghoshbinayak ghoshbinayak | My Wikis | Help | Sign Out
+IT703-ISS
+
+    Home
+    pages changes
+
+All Pages
+
+    home
+
+ghoshbinayak
+Information and System Security
+Introduction [2T] (08/07/2015)Basics of Information Security [2T] (09/07/2015)Symmetric Encryption – Classical Algorithms [4T] (15/07/2015, 16/07/2015)Cryptanalysis challenge CRYPTIC (22/07/2015)Symmetric Encryption – Block Cipher Algorithms [2T] (24/07/2015)Symmetric Encryption – DES [2T] (29/07/2015)Symmetric Encryption – AES [2T] (31/07/2015)Symmetric Encryption – Stream Cipher Algorithms [2T] (05/08/2015)Asymmetric Encryption – Classical Algorithms [2T] (07/08/2015)Asymmetric Encryption – RSA [2T] (12/08/2015)Quantum Cryptography [2T] (14/08/2015)Mid-Semester Examinations (15/09/2014 to 23/09/2014) [Previous year's Question, Solution]Asymmetric Encryption – Elliptic Curve Cryptosystems [2T] (25/09/2015)Cryptographic Hash Functions [2T] (30/09/2015)Mutual Trust [2T] (02/10/2015)Transport Level Security [2T] (07/10/2015)Wireless Network Security [2T] (09/10/2015)
+[FULL SLIDES UNTIL NOW] [8T]
+
+Semester ExaminationTheory (??/11/2015)Lab (??/12/2015)
+
+Laboratory Classes [Lab Manual]
+1. Consider that there are four sets of characters, namely the uppercase English alphabets, the lowercase English alphabets, the decimal digits and the special characters. The strength of a password can be defined as weak, moderate, strong and very strong based on whether its elements belong to any one, two, three or all the four sets said above, respectively. Take a password as user input and return its strength. Also return the message that the password is too short if the length is no more than six. [3L] (10/07/2015)2. Write a program in C/C++/Java to implement a Scytale with both encryption and decryption schemes. [3L] (17/07/2015)3. Write a program in C/C++/Java to read a large file containing English text only and show the frequencies of its characters. Now encrypt this plaintext with a generalized Caesar cipher with key value 7 and show the frequencies of characters in the ciphertext. [3L] (21/07/2015)4. A grayscale image is given in the uncompressed PGM format. Hide your secret message in the least significant bit of every pixel constituting the image. Show the processed image and retrieve the hidden information back. [3L] (28/07/2015)5. Write a program in C/C++/Java to construct a playfair matrix given a secret key. [3L] (04/08/2015)6. Write a program in C/C++/Java to implement a Playfair cipher that encrypts and decrypts message using a playfair matrix. [3L] (11/08/2015)7. Write a program in C/C++/Java to implement the DES algorithm. [3L] (18/08/2015)8. Write a program in C/C++/Java to implement the AES algorithm. [3L] (25/08/2015)9. Write a program in C/C++/Java to implement RC4 cipher. [3L] (01/09/2015)10. Write a program in C/C++/Java to generate the keys of RSA and use them to encrypt and decrypt a given plaintext in numeric form. [3L] (08/09/2015)11. Write a program in C/C++/Java to implement mutual trust with symmetric key distribution using symmetric encryption scheme. [3L] (22/09/2015)12. Write a program in C/C++/Java to implement a safe chatting interface in a client-server network incorporating encryption and decryption schemes in both the terminals. [3L] (29/09/2015)
+Teaching Assistants
+Sovan Kumar Sahoo, Swapan Shakhari, Nayan Biswas
+Contact: malaybhattacharyya@it.iiests.ac.in
+Introductions
+mb_research Jun 20, 2014
+
+Use the news feed to introduce yourself, start discussions, and manage your Classroom.
+
+Help · About · Blog · Pricing · Privacy · Terms · Support
+Portions not contributed by visitors are Copyright 2015 Tangient LLC
