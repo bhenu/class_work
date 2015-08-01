@@ -9,8 +9,7 @@ int main(int argc, char const *argv[])
 	FILE * op;
 	char c, d;
 	unsigned char msgbit;
-	int _i, _j, _k, msgover;
-	char digit[3];
+	int _i, _j, msgover;
 	int parsedint = 0;
 
 	if (argc < 4)
@@ -27,8 +26,7 @@ int main(int argc, char const *argv[])
 	msg = fopen(msg_path, "r");
 	op = fopen(output_path, "w");
 
-
-	_i = _j = _k = msgover = 0; 
+	_i = _j = msgover = 0; 
 	while((c = getc(image)) != EOF){
 		
 		// skip first 4 lines
@@ -41,16 +39,10 @@ int main(int argc, char const *argv[])
 		
 		if (!msgover)
 		{
-			// make the pixel values
+			// get the pixel values
 			if(isdigit(c)){
 				ungetc(c, image);
-				_k = 0;
-				while((c = getc(image)) != ' '){
-					digit[_k++] = c;
-				}
-				digit[_k] = '\0';
-				parsedint = atoi(digit);
-				ungetc(c, image);
+				fscanf(image, "%d", &parsedint);
 			}
 			else{
 				putc(c, op);
@@ -65,15 +57,13 @@ int main(int argc, char const *argv[])
 					msgover = 1;
 				};
 			}
+
+			// overuse of bitwise operator
 			msgbit = d & 1;
 			d = d >> 1;
+			parsedint &= 0xfe;
+			parsedint |= msgbit;
 
-			if(msgbit){
-				parsedint = parsedint | 0x1;
-			}
-			else{
-				parsedint = parsedint & 0xfe;
-			}
 			fprintf(op, "%d", parsedint);
 			_i++; _i %= 8;
 		}
@@ -81,8 +71,6 @@ int main(int argc, char const *argv[])
 			putc(c, op);
 		}
 	}
-
-
 
 	// close the files
 	fclose(image);
