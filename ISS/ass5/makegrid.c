@@ -10,7 +10,6 @@ int main(int argc, char const *argv[])
 	}
 	const char *keyword = argv[1];
 
-
 	// fill the matrix
 	char *m = (char *)matrix;
 	for (int _j = 0; _j < 26; ++_j){
