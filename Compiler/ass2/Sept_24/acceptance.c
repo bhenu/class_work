@@ -1,12 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-// struct state{
-// 	char * name;
-// 	int id;
-// 	int isStart;
-// 	int isFinal;	
-// };
+int getSindex(char ** arr, char * key, int size){
+	int i = 0;
+	for(i=0; i<size; i++){
+		if(!strcmp(arr[i], key)){
+			return i;
+		}
+	}
+	return -1;
+}
+
+int getCindex(char * arr, char key, int size){
+	int i = 0;
+	for(i=0; i<size; i++){
+		if(arr[i] == key){
+			return i;
+		}
+	}
+	return -1;
+}
 
 int main(int argc, char const *argv[])
 {
@@ -88,5 +102,37 @@ int main(int argc, char const *argv[])
 		printf("%s ", finalStates[iii]);
 	}
 	puts("");
+
+	char * inputString;
+	printf("%s\n", "Enter the input string: ");
+	buff = (char *)calloc(100, 1);
+	scanf("%s", buff);
+	inputString = buff;
+	int ilen = strlen(inputString);
+	char * cState;
+	char c;
+	int si, ci;
+	cState = startState;
+	// printf("length%d\n", ilen);
+	// printf("%s %s\n", "input string: ", inputString);
+	for(iii=0; iii<ilen; iii++){
+		c = inputString[iii];
+		si = getSindex(states, cState, nstates);
+		ci = getCindex(chars, c, nchars);
+		if(ci >= 0 && si >= 0){
+			cState = transitions[nchars*si + ci];
+		}
+		else{
+			printf("%s\n", "Not accpted");
+			return 0;
+		}
+	}
+	int res = getSindex(finalStates, cState, nfinal);
+	if(res >= 0 ){
+		printf("%s\n", "Accepted!");		
+	}
+	else {
+		printf("%s\n", "Not accpted.");
+	}
 	return 0;
 }
