@@ -128,36 +128,47 @@ int main(int argc, char const *argv[])
 	inputString = buff;
 	int ilen = strlen(inputString);
 	transition cState, nState;
-	cState.nstates = 1;
 	cState.states= (int *)calloc(nstates, sizeof(int));
-	cState.states[0] = startState;
+	cState.states[startState] = 1;
 	char c;
 	int si, ci, ni;
 	for(iii=0; iii<ilen; iii++){
 		c = inputString[iii];
-		nState.nstates = nstates;
 		nState.states = (int *)calloc(nstates, sizeof(int));
-		for(jjj=0; jjj<cState.nstates; jjj++){
-			ci = getCindex(chars, c, nchars);
-			if(cState.states[jjj]){
-				if(ci >= 0){
-					kkk = 0;
-					while(kkk < transitions[nchars*jjj + ci].nstates){
-						ni = transitions[nchars*jjj + ci].states[kkk];
-						nState.states[ni] = 1;
-						kkk++;
-					}
-				}
-				else{
-					printf("%s\n", "Not accpted");
-					return 0;
+		ci = getCindex(chars, c, nchars);
+		if(ci >= 0){
+			for(jjj=0; jjj<nstates; jjj++){
+				if (cState.states[jjj]){
+						for(kkk = 0; kkk < transitions[nchars*jjj + ci].nstates; kkk++){
+							ni = transitions[nchars*jjj + ci].states[kkk];
+							nState.states[ni] = 1;
+						}
 				}
 			}
 		}
+		else{
+			printf("%s\n", "Not accpted.");
+			return 0;
+		}
+
 		free(cState.states);
 		cState.states = nState.states;
+		puts("cStates: ");
+		for(int lll= 0; lll< nstates; lll++){
+			if(cState.states[lll]){
+				printf("%s ", states[lll]);
+			}
+		}
+		puts("");
 	}
 
+	for(iii=0; iii<nfinal; iii++){
+		if(cState.states[finalStates[iii]]){
+			printf("%s\n", "Accepted!");
+			return 0;
+		}
+	}
 
+	printf("%s\n", "Not accpted.");
 	return 0;
 }
