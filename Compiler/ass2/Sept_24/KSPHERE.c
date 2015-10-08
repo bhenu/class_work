@@ -7,12 +7,12 @@ int combine(int * T, int * freq, int n, int k){
 	int U[2000];
 	int iii, jjj;
 
-	printf("n: %d, k: %d\n T: ", n, k);
+	// printf("n: %d, k: %d\n T: ", n, k);
 	for(iii=0; iii<k; iii++){
 		U[iii] = T[iii];
-		printf("%d ", T[iii]);
+		// printf("%d ", T[iii]);
 	}
-	printf("\n");
+	// printf("\n");
 
 	iii = k;
 	while(iii>=1 && T[iii-1] == n-k+iii){
@@ -22,17 +22,17 @@ int combine(int * T, int * freq, int n, int k){
 		return 0;
 	}
 	else{
-		for(jjj=iii; iii<=k; iii++){
+		for(jjj=iii; jjj<=k; jjj++){
 			U[jjj-1] = T[iii-1] + 1 + jjj - iii;
 		}
-		for(iii=0; iii<k; iii++){
-			printf("%d ", U[iii]);
-		}
-		printf("\n");
+		// for(iii=0; iii<k; iii++){
+		// 	printf("%d ", U[iii]);
+		// }
+		// printf("\n");
 	}
 	int lsum = 1; 
 	for(iii=0; iii<k; iii++){
-		lsum *= freq[U[iii]];
+		lsum *= freq[U[iii] - 1];
 	}
 	sum += lsum;
 	while(combine(U, freq, n, k));
@@ -55,13 +55,6 @@ int main(){
 		scanf("%d", &lowhems[iii]);
 	}
 
-	// dispaly
-	// for(iii=0; iii<m; iii++){
-	// 	printf("%d ", lowhems[iii]);
-	// }
-	// printf("\n");
-
-
 	// count the freq and sort
 	int * frequ;
 	int * freql;
@@ -80,11 +73,13 @@ int main(){
 
 	for(iii=1, jjj=0; iii<=1001; iii++){
 		if(frequ[iii]){
+			freql[jjj] = frequ[iii];
 			uphems[jjj++] = iii;
 		}
 	}
 
-	int numelems = jjj -1;
+	int numelems = jjj;
+	// printf("length: %d\n", numelems);
 	int T[2000];
 	for(iii=2; iii<=c+1; iii++){
 		if(iii > numelems){
@@ -95,10 +90,10 @@ int main(){
 		sum = 1;
 		for(jjj=1; jjj<=numelems; jjj++){
 			T[jjj-1]=jjj;
-			sum *= frequ[jjj];
+			sum *= freql[jjj-1];
 		}
 
-		combine(T, frequ, numelems, iii);
+		combine(T, freql, numelems, iii);
 		printf("%d ", sum);
 	}
 	printf("\n");
