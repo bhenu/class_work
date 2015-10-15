@@ -37,7 +37,7 @@ void eClosure(	char ** states,
 				int startState,
 				int epsilon){
 	int si, iii;
-	printf("%s\n", states[startState]);
+	printf("%s ", states[startState]);
 	for(iii=0; iii<transitions[startState*nchars + epsilon].nstates; iii++){
 		si = transitions[startState*nchars + epsilon].states[iii];
 		if(si == -1){
@@ -154,7 +154,9 @@ int main(int argc, char const *argv[])
 	int si;
 	for(iii=0; iii<nstates; iii++){
 		memset(visited, 0, sizeof(int)*nstates);
+		printf("eClosure of %s: ", states[iii]);
 		eClosure(states, nstates, nchars, transitions, visited, iii, epsilon);
+		puts("");
 	}
 	
 	return 0;
