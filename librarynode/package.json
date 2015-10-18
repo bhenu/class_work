@@ -15,5 +15,10 @@
     "passport": "^0.2.2",
     "serve-favicon": "~2.3.0",
     "sqlite3": "^3.0.10"
+  },
+  "devDependencies": {
+    "express-jwt": "^3.1.0",
+    "jsonwebtoken": "^5.4.0",
+    "passport": "^0.2.2"
   }
 }
