@@ -1,0 +1,20 @@
+<h1>Sign up</h1>
+<p>Register to avail the library service.</p>
+<br/>
+{{#if error}}
+	<p style="color: red">{{error}}</p>
+{{/if}}
+{{#if success}}
+	<p style="color: green">{{success}}</p>
+{{/if}}
+<form role='form' action="/signup" method="post" style='max-width: 300px;'>
+	<input type='text' name="email" placeholder='Enter valid email'/>
+	<input type='password' name="password" placeholder='Password'/>
+	<input type='password' name="retype" placeholder='Retype Password'/>
+	<br/>
+	<button type='submit'> Sign Up!</button>
+	<a href='/'>
+		<button type="button"/> Cancel </button>
+	</a>
+	<br/>
+</form>

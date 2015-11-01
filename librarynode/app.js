@@ -1,18 +1,22 @@
+'use strict'
 var express = require('express');
+var exphbs  = require('express-handlebars');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var session = require('express-session');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var signup = require('./routes/signup');
+var login = require('./routes/login');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('handlebars', exphbs({defaultLayout: 'index'}));
+app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,8 +26,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'aso4r03jrinfer983hwejq78549*&$(#hudsifh*#(paoe039nlkc,zagphh',
+  resave: false,
+  saveUninitialized: true,
+}))
+
 app.use('/', routes);
-app.use('/users', users);
+app.use('/login', login);
+app.use('/signup', signup);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
