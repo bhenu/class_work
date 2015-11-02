@@ -4,10 +4,15 @@ var	express = require('express'),
 	scrypt = require('scrypt');
 
 router.get('/', function(req, res, next) {
-	res.render('login', {title: 'Login'});
+	if(req.user){
+		res.redirect('/dashboard');
+	}
+	else{
+		res.render('login', {title: 'Login'});
+	}
 });
 
-router.post('/', function(req, res, next){
+router.post('/', function(req, res){
 	var email = req.body.email;
 	var pass = req.body.password;
 	var promise = users.getuser(email);
@@ -19,7 +24,7 @@ router.post('/', function(req, res, next){
 			var isvalid = scrypt.verifyKdfSync(result[0].pass.buffer, pass);
 			if(isvalid){
 				req.session.email = email;
-				res.redirect('/');
+				res.redirect('/dashboard');
 			}
 			else{
 				res.render('login', {title: 'Login', error: 'Invalid email or password (wrong pass)'});

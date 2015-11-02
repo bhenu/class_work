@@ -23,7 +23,15 @@ var createuser = function(email, pass) {
 	var users = db.collection('users');
 	var salt = randomstring.generate();
 	var kdf = scrypt.kdfSync(pass, {"N": 1024, "r":8, "p":16}, 64, salt);
-	var res = users.insert({email: email, pass: kdf});
+	var res = users.insert({
+		email: email,
+		pass: kdf,
+		isadmin: false,
+		fullname: undefined,
+		bookcount: 0,
+		books: []
+	});
+	db.close();
 	return res;
 };
 

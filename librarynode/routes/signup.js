@@ -4,12 +4,17 @@ var express = require('express'),
 	email_validator = require('email-validator');
 
 /* Show the sign up page */
-router.get('/', function(req, res, next) {
-	res.render('signup', {title: 'Sign Up'});
+router.get('/', function(req, res) {
+	if(req.user){
+		res.redirect('/dashboard');
+	}
+	else{
+		res.render('signup', {title: 'Sign Up'});
+	}
 });
 
 /* Create new accoutn */
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
 	var email = req.body.email;
 	var pass = req.body.password;
 	var retype = req.body.retype;

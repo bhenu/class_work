@@ -10,6 +10,8 @@ var session = require('express-session');
 var routes = require('./routes/index');
 var signup = require('./routes/signup');
 var login = require('./routes/login');
+var admin = require('./routes/admin');
+var users = require('./models/users');
 
 var app = express();
 
@@ -26,16 +28,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 'aso4r03jrinfer983hwejq78549*&$(#hudsifh*#(paoe039nlkc,zagphh',
   resave: false,
   saveUninitialized: true,
-}))
+}));
+
+app.use(function(req, res, next){
+  if(req.session && req.session.email){
+    var promise = users.getuser(req.session.email);
+    promise.then(function(result){
+      if(result.length > 0){
+        req.user = result[0];
+        delete req.user.pass;
+        res.locals.user = req.user;
+      }
+      next();
+    });
+  }
+  else {
+    next();
+  }  
+});
 
 app.use('/', routes);
 app.use('/login', login);
 app.use('/signup', signup);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

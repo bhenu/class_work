@@ -1,0 +1,17 @@
+<h2>Basic Info:</h2>
+{{#if user.fullname}}
+<h3>{{user.fullname}}</h3>
+{{else}}
+<h3>Masked man</h3>
+{{/if}}
+<strong>email: </strong><span>{{user.email}}</span>
+
+<p>rest to follow soon..</p>
+<a href="/logout">Logout</a>
+
+<h2>Actions:</h2>
+{{#if user.isadmin}}
+	go to <a href="/admin">Admin panel</a>.
+{{else}}
+	sorry no actions available for you at the moment.
+{{/if}}

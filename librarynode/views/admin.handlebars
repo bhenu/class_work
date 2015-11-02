@@ -1,0 +1,14 @@
+{{#if error}}
+	<span style="color: red">{{error}}</span>
+{{/if}}
+
+{{#if success}}
+	<span style="color: green">{{success}}</span>
+{{/if}}
+<br/>
+{{#if user.isadmin}}
+<h2>Actions: </h2>
+<a href='/admin/manage-books'>Manage books</a><br/>
+<a href='/admin/manage-users'>Manag Users</a></br>
+<a href='/admin/book-requests'>View Book requests</a></br>
+{{/if}}
