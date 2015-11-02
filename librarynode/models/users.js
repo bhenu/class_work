@@ -1,4 +1,4 @@
-'use strict'
+'usersse strict'
 var db = require('mongoskin').db('mongodb://localhost:27017/test'),
 	scrypt = require('scrypt'),
 	randomstring = require('randomstring');
@@ -45,5 +45,5 @@ process.on('SIGINT', function() {
     db.close(function(){
         console.log('database connection has been closed.');
         process.exit();
-    })
-})
+    });
+});

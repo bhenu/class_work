@@ -29,9 +29,10 @@ var findbook = function(querry, type){
 	if(type === "title"){
 		promise = new Promise(function(resolve, reject){
 			var books = db.collection('books');
-			var res = books.find({"title": "/" + querry +"/"});
+			var res = books.find({"title": {$regex: querry}});
 			res.toArray(function(err, arr){
 				if(!err){
+					console.log(arr);
 					resolve(arr);
 				}
 				else{
@@ -44,7 +45,7 @@ var findbook = function(querry, type){
 	else if(type == "author"){
 		promise = new Promise(function(resolve, reject){
 			var books = db.collection('books');
-			var res = books.find({"author": "/" + querry +"/"});
+			var res = books.find({"author": {$regex: querry}});
 			res.toArray(function(err, arr){
 				if(!err){
 					resolve(arr);

@@ -30,7 +30,7 @@ router.get('/find', function(req, res){
 });
 
 router.post('/find', function(req, res){
-	var promise = books.findbook(req.body.query, req.body.type);
+	var promise = books.findbook(req.body.query, req.body.field);
 	promise.then(function(result){
 		if(result.length === 0){
 			res.render('find', {error: "Nothing found, sorry."});
