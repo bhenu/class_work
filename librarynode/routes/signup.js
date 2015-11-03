@@ -15,6 +15,7 @@ router.get('/', function(req, res) {
 
 /* Create new accoutn */
 router.post('/', function(req, res) {
+	var fullname = req.body.fullname;
 	var email = req.body.email;
 	var pass = req.body.password;
 	var retype = req.body.retype;

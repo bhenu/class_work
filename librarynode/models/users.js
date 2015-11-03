@@ -19,7 +19,7 @@ var getuser = function(email){
 	});
 };
 
-var createuser = function(email, pass) {
+var createuser = function(email, pass, fullname) {
 	var users = db.collection('users');
 	var salt = randomstring.generate();
 	var kdf = scrypt.kdfSync(pass, {"N": 1024, "r":8, "p":16}, 64, salt);
@@ -27,7 +27,7 @@ var createuser = function(email, pass) {
 		email: email,
 		pass: kdf,
 		isadmin: false,
-		fullname: undefined,
+		fullname: fullname,
 		bookcount: 0,
 		books: []
 	});
