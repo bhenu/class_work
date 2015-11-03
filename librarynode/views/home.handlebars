@@ -1,13 +1,24 @@
 {{#if message}}
-	<span class='overhead-msg'>{{message}}</span>
+	<span id="overhead-msg">{{message}} <span id="overhead-msg-close">X</span></span>
 {{/if}}
-<h2 style="color: cyan"> Yo Handlebars! :{ </h2>
 
-{{#if user}}
-	<a href="/logout">logout</a>
-{{else}}
-	<a href="/login">login</a> or <a href="/signup">sign up</a>
-{{/if}}
+<section id="header">
+	<div class="content-wrapper">
+		<span id="logo-text">Ramanujan Central Library</span>
+		{{#if user}}
+			Welcome <span style="font-weight: bold">{{user.fullname}}</span> (<a href="/logout">logout</a>)
+		{{else}}
+			<form role='form' action="/login" method="post" id="header-login">
+			    <input type='text' name="email" placeholder='Email address'/>
+			    <input type='password' name="password" placeholder='Password'/>
+			    <button type='submit'> Log In</button>
+			    <br/>
+			    <a href='/forgot'>Forgot password?</a>
+			</form>
+		{{/if}}
+	</div>
+</section>
+
 
 <form role='form' action="/find" method="post" style='max-width: 800px;'>
     <input type='text' name="query" placeholder='Enter the book title'/>
@@ -19,3 +30,5 @@
 	&nbsp;&nbsp;
     <button type='submit'> Search</button>
 </form>
+
+<section class="footer"></section>

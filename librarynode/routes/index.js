@@ -6,7 +6,7 @@ var books = require('../models/books');
 /* GET home page. */
 router.get('/', function(req, res) {
 	if(req.session.email){
-		res.render('home', { title: 'Home', message: req.session.email});
+		res.render('home', { title: 'Home' });
 	}
 	else if(req.query.message === 'signupsucc'){
 		res.render('home', { title: 'Home', message: 'Signup successful. You can login now.'});
