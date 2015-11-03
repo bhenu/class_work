@@ -48,15 +48,15 @@ int main(){
 	jjj =iii = 0;
 	while((c=fgetc(ptext))!=EOF){
 		// keep on generating the keys
-			Ckey = 0;
-			iii = (iii+1)%256;
-			jjj = (jjj+S[iii])%256;
-			temp = S[iii];
-			S[iii] = S[jjj];
-			S[jjj] = temp;
-			Ckey = S[(S[iii]+S[jjj])%256];
-			// printf("%c, %x\n", c, Ckey);
-			fprintf(ctext, "%x", c^Ckey);
+		Ckey = 0;
+		iii = (iii+1)%256;
+		jjj = (jjj+S[iii])%256;
+		temp = S[iii];
+		S[iii] = S[jjj];
+		S[jjj] = temp;
+		Ckey = S[(S[iii]+S[jjj])%256];
+		// printf("%c, %x\n", c, Ckey);
+		fprintf(ctext, "%c", c^Ckey);
 	}
 	fclose(ctext);
 	fclose(ptext);
