@@ -30,7 +30,7 @@ router.post('/', function(req, res) {
 					res.render('signup', {title: 'Sign up', error: "Passwords didnot match."});
 				}
 				else{
-					users.createuser(email, pass);
+					users.createuser(email, pass, fullname);
 					res.redirect('/?message=signupsucc');
 				}
 			}

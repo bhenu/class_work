@@ -8,10 +8,14 @@ a {
   color: #00B7FF;
 }
 
+h2 {
+  color: rgb(80, 60, 36);
+}
+
 #overhead-msg {
 	display: block;
 	text-align: center;
-	padding: 10px;
+	padding: 10px 0;
 	background: #F9C795;
 	color: black;
 	width: 100%;
@@ -60,7 +64,7 @@ a {
 	margin: 0 auto;
 }
 
-.home-signup-container {
+.home-signup-container, .main-content {
 	width: 100%;
 	height: 320px;
 	background-image: url('/images/books.jpg');
@@ -130,4 +134,45 @@ a {
 .home-loggedout-rc{
 	float: right;
 	width: 25%;
+}
+
+.home-user-info {
+    padding-left: 30px;
+    padding-top: 40px;
+    padding-right: 30px;
+    border-left: 1px solid #DDCDC2;
+    border-right: 1px solid #DDCDC2;
+    background: rgba(255, 255, 255, 0.5) none repeat scroll 0% 0%;
+    width: 100%;
+    height: 280px;
+}
+
+.login-container, .signup-container {
+	height: 290px;
+	width: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 50px;	
+	padding-top: 30px;
+	padding-bottom: 0; 
+	text-align: center;
+	background: rgba(255, 255, 255, 0.7);
+	border-right: 1px solid #DDCDC2;
+    border-left: 1px solid #DDCDC2;
+}
+
+.login-container > form > input{
+	width: 100%;
+	height: 30px;
+	margin: 3px;
+}
+
+.signup-container > form > input{
+	width: 100%;
+	height: 25px;
+	margin: 3px;
+}
+
+.admin-panel {
+	padding-top: 20px; 
 }
