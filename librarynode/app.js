@@ -17,7 +17,32 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({defaultLayout: 'index'}));
+var hbs = exphbs.create({
+    defaultLayout: 'main',
+});
+hbs.handlebars.loadPartial = function (name) {
+  var partial = hbs.handlebars.partials[name];
+  if (typeof partial === "string") {
+    partial = hbs.handlebars.compile(partial);
+    hbs.handlebars.partials[name] = partial;
+  }
+  return partial;
+};
+
+hbs.handlebars.registerHelper("block",
+  function (name, options) {
+    /* Look for partial by name. */
+    var partial
+      = hbs.handlebars.loadPartial(name) || options.fn;
+    return partial(this, { data : options.hash });
+});
+
+hbs.handlebars.registerHelper("partial",
+  function (name, options) {
+    hbs.handlebars.registerPartial(name, options.fn);
+});
+
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public

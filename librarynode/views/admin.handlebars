@@ -25,9 +25,10 @@
 		{{#if user.isadmin}}
 		<div class="admin-panel">
 			<h2>Actions: </h2>
-			<a href='/admin/manage-books'>Manage books</a><br/>
-			<a href='/admin/manage-users'>Manag Users</a></br>
-			<a href='/admin/book-requests'>View Book requests</a></br>
+			<a href="/admin/issue">Issue books</a>
+			<a href='/admin/books'>Manage books</a><br/>
+			<a href='/admin/users'>Manag Users</a></br>
+			<a href='/admin/requests'>View Book requests</a></br>
 		</div>
 		{{else}}
 			<p style="color: red; font-size: 1.3em; font-weight: lighter; text-align: center; margin: 0; padding-top: 100px"><a href="/logout">Logout</a> and login as admin user.</p>

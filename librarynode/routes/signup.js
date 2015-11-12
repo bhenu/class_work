@@ -6,7 +6,7 @@ var express = require('express'),
 /* Show the sign up page */
 router.get('/', function(req, res) {
 	if(req.user){
-		res.redirect('/dashboard');
+		res.redirect('/');
 	}
 	else{
 		res.render('signup', {title: 'Sign Up'});
