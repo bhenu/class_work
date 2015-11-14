@@ -4,13 +4,18 @@
 
 #define BLOCK_SIZE 256
 
-int main(){
+int main(int argc, char ** argv){
 	unsigned char S[BLOCK_SIZE];
 	unsigned char T[BLOCK_SIZE];
 	unsigned char K[BLOCK_SIZE];
 	unsigned char temp, CKey;
 	char Key[256];
 	int iii, jjj, keylen, keybitlen;
+
+	if(argc < 3){
+		printf("%s\n", "error:\nusage: RC4encode <input file> <output file>");
+		return 0;
+	}
 
 	// input the key
 	keylen = 0;
@@ -43,8 +48,8 @@ int main(){
 	//take plain text as input
 	int Ckey;
 	char c;
-	FILE * ptext = fopen("plaintext.txt", "r");
-	FILE * ctext = fopen("ciphertxt.txt", "w");
+	FILE * ptext = fopen(argv[1], "r");
+	FILE * ctext = fopen(argv[2], "w");
 	jjj =iii = 0;
 	while((c=fgetc(ptext))!=EOF){
 		// keep on generating the keys
