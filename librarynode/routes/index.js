@@ -11,6 +11,9 @@ router.get('/', function(req, res) {
 	else if(req.query.message === 'signupsucc'){
 		res.render('home', { title: 'Home', message: 'Signup successful. You can login now.'});
 	}
+	else if(req.query.message === 'useredited'){
+		res.render('home', { title: 'Home', message: 'Success: User info saved.'});
+	}
 	else{
 		res.render('home', { title: 'Home' });
 	}

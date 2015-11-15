@@ -35,9 +35,34 @@ var createuser = function(email, pass, fullname) {
 	return res;
 };
 
+var updateuser = function(email, pass, fullname) {
+	var users = db.collection('users');
+	if(pass){
+		var salt = randomstring.generate();
+		var kdf = scrypt.kdfSync(pass, {"N": 1024, "r":8, "p":16}, 64, salt);
+		var res = users.update(
+			{ email: email}, 
+			{$set: { pass: kdf,
+			  fullname: fullname
+			}}
+		);
+		db.close();
+		return res;
+	}
+	else {
+		var res = users.update(
+			{ email: email}, 
+			{$set: { fullname: fullname}}
+		);
+		db.close();
+		return res;
+	}
+};
+
 module.exports = {
 	getuser: getuser,
-	createuser: createuser
+	createuser: createuser,
+	updateuser: updateuser
 };
 
 process.on('SIGINT', function() {
