@@ -1,39 +1,9 @@
-{{#if message}}
-	<span id="overhead-msg">{{message}} <span id="overhead-msg-close">X</span></span>
-{{else}}
-	<span id="overhead-msg" style='display: none'>{{message}} <span id="overhead-msg-close">X</span></span>
-{{/if}}
-
-<section id="header">
-	<div class="content-wrapper">
-		<span id="logo-text-light">Ramanujan</span><span id="logo-text-bold">CentralLibrary</span>
-		{{#if user}}
-		<div id="header-username">
-			Welcome &nbsp;<span style="font-weight: bold">
-			{{#if user.fullname}}
-			{{user.fullname }}
-			{{else}}
-			Someone
-			{{/if}}
-			</span> (<a href="/logout">logout</a>)
-		</div>
-		{{else}}
-			<form role='form' action="/login" method="post" id="header-login">
-			    <input type='text' name="email" placeholder='Email address'/>
-			    <input type='password' name="password" placeholder='Password'/>
-			    <button type='submit'> Log In</button>
-			    <br/>
-			    <a href='/#forgot'>Forgot password?</a>
-			</form>
-		{{/if}}
-	</div>
-</section>
+{{#partial "main-content"}} 
 	{{#if user}}
-		<section class="main-content">
 			<div class="content-wrapper">
 				<div class="home-loggedout-rc">
 					<div class="home-user-info">
-						<h2>Basic Info: <a href="/user/edit"><span style=" float: right; font-size: 0.7em"><span style="font-family: icons;">✏</span>edit</span></a></h2>
+						<h2 style="margin-bottom: 0">Basic Info: <a href="/user/edit"><span style=" float: right; font-size: 0.7em"><span style="font-family: icons;">✏</span>edit</span></a></h2>
 						{{#if user.fullname}}
 						<h3>{{user.fullname}}</h3>
 						{{else}}
@@ -43,9 +13,9 @@
 
 						<p>rest to follow soon..</p>
 
-						<h2>Actions:</h2>
+						<h2 style="margin-bottom: 2px">Actions:</h2>
 						{{#if user.isadmin}}
-							go to <a href="/admin">Admin panel</a>.
+							<span style="font-family: icons; color: #555"></span> <a href="/admin">Admin panel</a>
 						{{else}}
 							sorry no actions available for you at the moment.
 						{{/if}}
@@ -95,9 +65,6 @@
 					</form>
 				</div>
 			</div>
-		</section>
 	{{/if}}	
-
-<section class="footer">
-	<img src="images/iiestslogo.png" />
-</section>
+{{/partial}}
+{{> incheader}}

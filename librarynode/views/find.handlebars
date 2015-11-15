@@ -1,24 +1,26 @@
-<form role='form' action="/find" method="post" style='max-width: 800px;'>
-    <input type='text' name="query" placeholder='Enter the book title'/>
-	<select name="field">
-	  <option value="author">Author</option> 
-	  <option value="title" selected>Title</option>
-	  <option value="isbn">ISBN</option>
-	</select>
-	&nbsp;&nbsp;
-    <button type='submit'> Search</button>
-</form>
+{{#partial "main-content"}}
+	<form role='form' action="/find" method="post" style='max-width: 800px;'>
+	    <input type='text' name="query" placeholder='Enter the book title'/>
+		<select name="field">
+		  <option value="author">Author</option> 
+		  <option value="title" selected>Title</option>
+		  <option value="isbn">ISBN</option>
+		</select>
+		&nbsp;&nbsp;
+	    <button type='submit'> Search</button>
+	</form>
 
-{{#if error}}
-	<span style='color: red'>{{error}}</span>
-{{/if}}
+	{{#if error}}
+		<span style='color: red'>{{error}}</span>
+	{{/if}}
 
-{{#if books}}
-	<ul>
-	{{#each books}}
-		<li>{{this.title}}</li>
-	{{/each}}
-	</ul>
-{{/if}}
-{{#partial "message"}} jhinga la la hu hu {{/partial}}
-{{> test}}
+	{{#if books}}
+		<ul>
+		{{#each books}}
+			<li><strong>{{this.title}}</strong> by {{this.authors}}</li>
+		{{/each}}
+		</ul>
+	{{/if}}
+{{/partial}}
+
+{{> incheader}}

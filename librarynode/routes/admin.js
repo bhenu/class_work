@@ -5,18 +5,18 @@ var ifAdmin = require('../middleware').ifAdmin;
 var books = require('../models/books');
 
 router.get('/', requireLogin, ifAdmin, function(req, res) {
-	res.render('admin');
+	res.render('admin/home');
 });
 
-router.get('/manage-books', requireLogin, ifAdmin, function(req, res){
-	res.render('manage-books');
+router.get('/books', requireLogin, ifAdmin, function(req, res){
+	res.render('admin/manage-books');
 });
 
-router.get('/manage-books/add', requireLogin, ifAdmin, function(req, res){
-	res.render('add-book');
+router.get('/books/add', requireLogin, ifAdmin, function(req, res){
+	res.render('admin/add-book');
 });
 
-router.post('/manage-books/add', requireLogin, ifAdmin, function(req, res){
+router.post('/books/add', requireLogin, ifAdmin, function(req, res){
 	var book = {};
 	book.title = req.body.title;
 	book.isbn  = req.body.isbn;

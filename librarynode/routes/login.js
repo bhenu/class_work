@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 		res.redirect('/');
 	}
 	else{
-		res.render('login', {title: 'Login'});
+		res.render('auth/login', {title: 'Login'});
 	}
 });
 
@@ -18,7 +18,7 @@ router.post('/', function(req, res){
 	var promise = users.getuser(email);
 	promise.then(function(result){
 		if(result.length === 0){
-			res.render('login', {title: 'Login', error: "Invalid email or password."});			
+			res.render('auth/login', {title: 'Login', error: "Invalid email or password."});			
 		}
 		else{
 			var isvalid = scrypt.verifyKdfSync(result[0].pass.buffer, pass);
@@ -27,11 +27,11 @@ router.post('/', function(req, res){
 				res.redirect('/');
 			}
 			else{
-				res.render('login', {title: 'Login', error: 'Invalid email or password.'});
+				res.render('auth/login', {title: 'Login', error: 'Invalid email or password.'});
 			}
 		}
 	}).catch(function(err){
-		res.render('login', {title: 'Login', error: err.toString()});
+		res.render('auth/login', {title: 'Login', error: err.toString()});
 	});
 });
 

@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 		res.redirect('/');
 	}
 	else{
-		res.render('signup', {title: 'Sign Up'});
+		res.render('auth/signup', {title: 'Sign Up'});
 	}
 });
 
@@ -20,14 +20,14 @@ router.post('/', function(req, res) {
 	var pass = req.body.password;
 	var retype = req.body.retype;
 	if(!email_validator.validate(email)){
-		res.render('signup', {title: 'Sign up', error: "Invalid email address."});
+		res.render('auth/signup', {title: 'Sign up', error: "Invalid email address."});
 	}
 	else{
 		var promise = users.getuser(email);
 		promise.then(function(result){
 			if(result.length === 0){
 				if(pass != retype){
-					res.render('signup', {title: 'Sign up', error: "Passwords didnot match."});
+					res.render('auth/signup', {title: 'Sign up', error: "Passwords didnot match."});
 				}
 				else{
 					users.createuser(email, pass, fullname);
@@ -35,10 +35,10 @@ router.post('/', function(req, res) {
 				}
 			}
 			else{
-				res.render('signup', {title: 'Sign up', error: "User exists! -_-"});
+				res.render('auth/signup', {title: 'Sign up', error: "User exists! -_-"});
 			}
 		}).catch(function(err){
-			res.render('signup', {title: 'Sign up', error: err.toString()});
+			res.render('auth/signup', {title: 'Sign up', error: err.toString()});
 		});
 	}
 });

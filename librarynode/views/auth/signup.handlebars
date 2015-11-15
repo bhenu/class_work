@@ -1,10 +1,4 @@
-<section id="header">
-  <div class="content-wrapper">
-    <span id="logo-text-light">Ramanujan</span><span id="logo-text-bold">CentralLibrary</span>
-  </div>
-</section>
-<section class="main-content">
-  <div class="signup-container">
+{{#partial "auth-form"}}
 	<h2>Sign up</h2>
 	{{#if error}}
 		<p style="color: red">{{error}}</p>
@@ -21,5 +15,5 @@
 		</a>
 		<br/>
 	</form>
-  </div>
-</section>
+{{/partial}}
+{{> auth}}

@@ -14,7 +14,7 @@ var ifAdmin = function(req, res, next){
 		next();
 	}
 	else{
-		res.render('admin', {error: "Sorry you don't have admin access. :( "});
+		res.render('admin/home', {message: "Sorry you don't have admin access. :( "});
 	}
 }
 

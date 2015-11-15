@@ -21,10 +21,6 @@ router.get('/logout', function(req, res){
 	res.redirect('/');
 });
 
-router.get('/dashboard', requireLogin, function(req, res){
-	res.render('dashboard', {title: 'Dashboard'});
-});
-
 router.get('/find', function(req, res){
 	res.render('find');
 });
