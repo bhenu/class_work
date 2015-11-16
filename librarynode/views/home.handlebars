@@ -9,9 +9,9 @@
 						{{else}}
 						<h3>Someone</h3>
 						{{/if}}
-						<strong>email: </strong><span>{{user.email}}</span>
-
-						<p>rest to follow soon..</p>
+						<strong>email: </strong><span>{{user.email}}</span><br/><br/>
+						<strong>books issued: </strong>{{user.bookcount}}
+						<span style='float: right'><a href="#view" style="text-decoration: none"><span style="font-family: icons; font-size: 0.8em"></span> view</a></span>
 
 						<h2 style="margin-bottom: 2px">Actions:</h2>
 						{{#if user.isadmin}}

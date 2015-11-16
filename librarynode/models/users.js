@@ -59,10 +59,26 @@ var updateuser = function(email, pass, fullname) {
 	}
 };
 
+var addbook = function(email, bookid){
+	var users = db.collection('users');
+	var res = users.update({email: email}, {$push: {books: bookid}, $inc: {bookcount: 1}});
+	db.close()
+	return res;
+};
+
+var removebook = function(email, bookid){
+	var users = db.collection('users');
+	var res = users.update({email: email}, {$pull: {books: bookid}, $inc: {bookcount: -1}});
+	db.close()
+	return res;
+};
+
 module.exports = {
 	getuser: getuser,
 	createuser: createuser,
-	updateuser: updateuser
+	updateuser: updateuser,
+	addbook: addbook,
+	removebook: removebook
 };
 
 process.on('SIGINT', function() {

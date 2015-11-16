@@ -27,7 +27,6 @@ router.post('/edit', requireLogin, function(req, res) {
 			}
 			else {
 				users.updateuser(req.user.email, undefined, fullname);
-				console.log('here');
 				res.redirect('/?message=useredited');
 			}
 		}
